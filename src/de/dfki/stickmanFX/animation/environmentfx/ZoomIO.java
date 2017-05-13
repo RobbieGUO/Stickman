@@ -37,9 +37,10 @@ public class ZoomIO extends AnimationFX {
             Platform.runLater(() -> mStickmanPane.getChildren().clear());
             Platform.runLater(() -> {
                 try {
-                    mStickmanFX.getStickmanStageController().getStickmanStage().addStickmanToStage(mStageIdentifier,
-                            mStickmanFX);
-                    mStickmanPane.setAlignment(Pos.CENTER);
+//                    mStickmanFX.getStickmanStageController().getStickmanStage().addStickmanToStage(mStageIdentifier,
+//                            mStickmanFX);
+//                    mStickmanPane.setAlignment(Pos.CENTER);
+                    mStickmanFX.getStickmanStageController().getStickmanStage().addStickmanToStage(mStageIdentifier);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

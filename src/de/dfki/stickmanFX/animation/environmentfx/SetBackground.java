@@ -27,6 +27,9 @@ public class SetBackground extends AnimationFX {
             add("bully2");
             add("oldlivingroom");
             add("oldkitchen");
+            add("door");
+            add("school");
+            add("road");
         }
     };
 

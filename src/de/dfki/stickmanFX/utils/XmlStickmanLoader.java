@@ -9,7 +9,10 @@ import de.dfki.stickmanFX.stage.StickmansOnStageFX;
 import de.dfki.stickmanFX.StickmanFX;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by alvaro on 10/9/16.
@@ -28,6 +31,12 @@ public class XmlStickmanLoader {
         File file = null;
         if (mFilePath != null) {
             file = new File(mFilePath + File.separator + "stickmanfx" + File.separator + "stickmanfx.xml");
+        }else{
+            try {
+                file = new File(new File(".").getCanonicalPath() + File.separator + "stickmanfx" + File.separator + "stickmanfx.xml");
+            } catch (IOException ex) {
+                Logger.getLogger(XmlStickmanLoader.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         if (file != null) {
