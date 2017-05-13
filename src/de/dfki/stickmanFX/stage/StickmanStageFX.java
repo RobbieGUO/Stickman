@@ -1,5 +1,6 @@
 package de.dfki.stickmanFX.stage;
 
+import de.dfki.bullying.BullyingHelpController;
 import de.dfki.common.commonFX3D.ApplicationLauncherImpl;
 import de.dfki.common.StickmansOnStage;
 import de.dfki.common.interfaces.StickmanStage;
@@ -26,6 +27,14 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.WindowEvent;
 
 /**
  * @author Robbie. Refactored by: acepero13
@@ -42,6 +51,10 @@ public class StickmanStageFX extends Application implements StickmanStage {
     private Map<String, Stage> stickmanFXStages = new HashMap<>();
     private LinkedList<String> stickmanNames = new LinkedList<>();
     private StagePaneHandlerFX generalConfigStageRoot;
+    
+    private static Boolean bullyingVSMControl = true;
+
+    private Boolean bullyingStageControl = true;
 
     public StickmanStageFX() { // This cannot be private because of
         // ApplicationFX
@@ -77,7 +90,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
         HBox root = generalConfigStageRoot.getConfigRoot();
         Scene scene = new Scene(root);
 //        scene.getStylesheets().add("de.dfki.stickmanFX.css.StickmanCSS.css");
-        scene.getStylesheets().add("de"+File.separator+"dfki"+File.separator+"stickmanFX"+File.separator+"css"+File.separator+"StickmanCSS.css");
+        scene.getStylesheets().add("de" + File.separator + "dfki" + File.separator + "stickmanFX" + File.separator + "css" + File.separator + "StickmanCSS.css");
         stage.setTitle("StickmanFX");
         stage.setScene(scene);
         stickmanFXStages.put(StageRoomFX.CONFIG_STAGE, stage);
@@ -111,6 +124,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
     // public void createStage(String uuid) throws IOException {
     public void createStage(String uuid, int x, int y, boolean decoration) throws IOException {
         final HBox root = getStageRoot();
+
         Platform.runLater(() -> {
             Scene stageScene = new Scene(root);
             Stage stage = new Stage();
@@ -124,9 +138,50 @@ public class StickmanStageFX extends Application implements StickmanStage {
 
             /// added by R
             //stageScene.setOnMouseClicked(mouseHandler);
+//        });
+            root.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent e) {
+                    if (e.getButton().equals(MouseButton.SECONDARY)) {
+                        if (bullyingStageControl) {
+                            bullyingVSMControl = false;
+                            bullyingStageControl = false;
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("/de/dfki/bullying/BullyingHelp.fxml"));
+                            try {
+                                AnchorPane bullyingroot = (AnchorPane) loader.load();
+                                Stage bullyingstage = new Stage();
+                                bullyingstage.setTitle("BullyingHelp");
+                                bullyingstage.initOwner(stage);
+                                Scene bullyingscene = new Scene(bullyingroot);
+                                bullyingstage.setScene(bullyingscene);
+                                
+                                BullyingHelpController controller = loader.getController();
+                                controller.setDialogStage(bullyingstage, sInstance);
+
+                                bullyingstage.showAndWait();
+                            } catch (IOException ex) {
+                                Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                }
+            });
         });
     }
 
+    public void changeBullyingStageFlag(){
+        bullyingStageControl = true;
+    }
+    
+    public void changeBullyingVSMFlag(){
+        bullyingVSMControl = true;
+    }
+    
+    public static Boolean returnBullyingVSMFlag(){
+        return bullyingVSMControl;
+    }
+    
     public void runLater(Runnable function) {
         Platform.runLater(function);
     }

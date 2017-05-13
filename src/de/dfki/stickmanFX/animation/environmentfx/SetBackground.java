@@ -23,6 +23,10 @@ public class SetBackground extends AnimationFX {
         {
             add("grassland");
             add("office");
+            add("bully1");
+            add("bully2");
+            add("oldlivingroom");
+            add("oldkitchen");
         }
     };
 
@@ -39,8 +43,11 @@ public class SetBackground extends AnimationFX {
 
             //Upload the picture
             if (list.contains(sParameter)) {
+//                mStickmanPane.setStyle("-fx-background-image: url('/de/dfki/stickmanFX/image/" + sParameter + ".jpg');"
+//                        + "-fx-background-repeat: repeat;-fx-background-position: center center; -fx-background-size: contain;");
                 mStickmanPane.setStyle("-fx-background-image: url('/de/dfki/stickmanFX/image/" + sParameter + ".jpg');"
-                        + "-fx-background-repeat: repeat;-fx-background-position: center center; -fx-background-size: contain;");
+                        + "-fx-background-repeat: no-repeat;-fx-background-position: center center; -fx-background-size: contain;-fx-background-size:cover;");
+//                contain;-fx-background-size:cover; auto
             } else {
                 // change the color of the background
                 Color theColor = Color.valueOf(sParameter);
