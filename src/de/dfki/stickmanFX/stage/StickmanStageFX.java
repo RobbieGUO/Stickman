@@ -5,6 +5,7 @@ import de.dfki.common.commonFX3D.ApplicationLauncherImpl;
 import de.dfki.common.StickmansOnStage;
 import de.dfki.common.interfaces.StickmanStage;
 import de.dfki.stickmanFX.StickmanFX;
+import de.dfki.welcome.WelcomeController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -51,8 +52,13 @@ public class StickmanStageFX extends Application implements StickmanStage {
     private Map<String, Stage> stickmanFXStages = new HashMap<>();
     private LinkedList<String> stickmanNames = new LinkedList<>();
     private StagePaneHandlerFX generalConfigStageRoot;
-    
+
     private static Boolean bullyingVSMControl = true;
+    private static Boolean bullyingVSMControlDoorBell = false;
+    private static Boolean bullyStart = false;
+    private static String userName = null;
+    private static String userGender = null;
+    private static int userAge = 0;
 
     private Boolean bullyingStageControl = true;
 
@@ -126,6 +132,8 @@ public class StickmanStageFX extends Application implements StickmanStage {
         final HBox root = getStageRoot();
 
         Platform.runLater(() -> {
+            bullyingVSMControlDoorBell = false;
+            bullyStart = false;
             Scene stageScene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(stageScene);
@@ -155,7 +163,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
                                 bullyingstage.initOwner(stage);
                                 Scene bullyingscene = new Scene(bullyingroot);
                                 bullyingstage.setScene(bullyingscene);
-                                
+
                                 BullyingHelpController controller = loader.getController();
                                 controller.setDialogStage(bullyingstage, sInstance);
 
@@ -164,24 +172,81 @@ public class StickmanStageFX extends Application implements StickmanStage {
                                 Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
+                    } else if (e.getButton().equals(MouseButton.PRIMARY)) {
+                        bullyingVSMControlDoorBell = true;
                     }
                 }
             });
+
+            FXMLLoader loaderWelcome = new FXMLLoader();
+            loaderWelcome.setLocation(getClass().getResource("/de/dfki/welcome/welcome.fxml"));
+            try {
+                AnchorPane welcomeroot = (AnchorPane) loaderWelcome.load();
+                Stage welcomestage = new Stage();
+                welcomestage.setTitle("Welcome");
+                welcomestage.initOwner(stage);
+                Scene welcomescene = new Scene(welcomeroot);
+                welcomestage.setScene(welcomescene);
+
+                WelcomeController controller = loaderWelcome.getController();
+                controller.setDialogStage(welcomestage);
+
+                welcomestage.setAlwaysOnTop(true);
+                welcomestage.showAndWait();
+            } catch (IOException ex) {
+                Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
 
-    public void changeBullyingStageFlag(){
+    public void changeBullyingStageFlag() {
         bullyingStageControl = true;
     }
-    
-    public void changeBullyingVSMFlag(){
+
+    public void changeBullyingVSMFlag() {
         bullyingVSMControl = true;
     }
-    
-    public static Boolean returnBullyingVSMFlag(){
+
+    public static Boolean returnBullyingVSMFlag() {
         return bullyingVSMControl;
     }
-    
+
+    public static Boolean bullyingVSMControlDoorBell() {
+        return bullyingVSMControlDoorBell;
+    }
+
+    public static Boolean returnbullyStartFlag() {
+        return bullyStart;
+    }
+
+    public static void setbullyStart(Boolean b) {
+        bullyStart = b;
+    }
+
+    public static String returnUserGender() {
+        return userGender;
+    }
+
+    public static void setUserGender(String s) {
+        userGender = s;
+    }
+
+    public static int returnUserAge() {
+        return userAge;
+    }
+
+    public static void setUserAge(int s) {
+        userAge = s;
+    }
+
+    public static String returnUserName() {
+        return userName;
+    }
+
+    public static void setUserName(String s) {
+        userName = s;
+    }
+
     public void runLater(Runnable function) {
         Platform.runLater(function);
     }

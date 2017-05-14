@@ -17,7 +17,9 @@ public class testStickmanFX {
 
         StageRoom stickmanStage = new StageRoomFX(0, 0, true);
         stickmanStage.addStickman("Patrick");
+        stickmanStage.addStickman("Anna");
 //        stickmanStage.launchConfiguration();
         stickmanStage.launchStickmanStage(true);
+        stickmanStage.getStickman("Patrick").doAnimation("Beat", 500,true);
     }
 }
