@@ -8,9 +8,11 @@ package de.dfki.bullying;
 import de.dfki.stickmanFX.stage.StickmanStageFX;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
@@ -35,11 +37,17 @@ public class BullyingHelpController implements Initializable {
     private Label q5;
     @FXML
     private Label t1;
+    @FXML
+    private Label experience;
+    @FXML
+    private Button goTOExperience;
 
     private Stage bullyingStage;
+    private StickmanStageFX sStickmanStageFX;
 
     public void setDialogStage(Stage stage, StickmanStageFX s) {
         this.bullyingStage = stage;
+        sStickmanStageFX =s;
 
         bullyingStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
@@ -56,43 +64,70 @@ public class BullyingHelpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        StickmanStageFX.setgoTOExperience(Boolean.FALSE);
+        
         t1.setText("Please click the label in the left side");
+        goTOExperience.setVisible(false);
         setIdForLabel();
+        
+        goTOExperience.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                StickmanStageFX.setgoTOExperience(Boolean.TRUE);
+                sStickmanStageFX.changeBullyingStageFlag();
+//                sStickmanStageFX.changeBullyingVSMFlag();
+                bullyingStage.close();
+            }
+        });
     }
 
     @FXML
     private void handleq1() {
+        goTOExperience.setVisible(false);
         t1.setText("Try to stop bullying.");
     }
 
     @FXML
     private void handleq2() {
+        goTOExperience.setVisible(false);
         t1.setText("Tell the teacher!");
     }
 
     @FXML
     private void handleq3() {
+        goTOExperience.setVisible(false);
         t1.setText("Yes !!!!!!");
     }
 
     @FXML
     private void handleq4() {
+        goTOExperience.setVisible(false);
         t1.setText("Tell the teacher. \n"
                 + "Do not ask a question twice!");
     }
 
     @FXML
     private void handleq5() {
+        goTOExperience.setVisible(false);
         t1.setText("I am scared, too! \n"
                 + ";=(");
     }
+    
+    @FXML
+    private void experience() {
+        goTOExperience.setVisible(true);
+        t1.setText("In another class there was a girl,"
+                + "that stepped in for a younger classmate that was tormented, too.\n"
+                + "Do you want her to help you?");
+    }
 
+    
     private void setIdForLabel() {
         q1.setId("Menu");
         q2.setId("Menu");
         q3.setId("Menu");
         q4.setId("Menu");
         q5.setId("Menu");
+        experience.setId("Menu");
     }
-
 }

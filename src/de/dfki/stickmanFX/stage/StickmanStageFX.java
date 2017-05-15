@@ -54,6 +54,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
     private StagePaneHandlerFX generalConfigStageRoot;
 
     private static Boolean bullyingVSMControl = true;
+    private static Boolean goTOExperience = false;
     private static Boolean bullyingVSMControlDoorBell = false;
     private static Boolean bullyStart = false;
     private static String userName = null;
@@ -133,6 +134,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
 
         Platform.runLater(() -> {
             bullyingVSMControlDoorBell = false;
+            goTOExperience = false;
             bullyStart = false;
             Scene stageScene = new Scene(root);
             Stage stage = new Stage();
@@ -151,9 +153,13 @@ public class StickmanStageFX extends Application implements StickmanStage {
                 @Override
                 public void handle(MouseEvent e) {
                     if (e.getButton().equals(MouseButton.SECONDARY)) {
-                        if (bullyingStageControl) {
+                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test");
+                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test2222222" + bullyingStageControl + "    "+bullyingVSMControlDoorBell );
+                        if (bullyingStageControl && bullyingVSMControlDoorBell) {
                             bullyingVSMControl = false;
                             bullyingStageControl = false;
+                            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test2222222");
+                            
                             FXMLLoader loader = new FXMLLoader();
                             loader.setLocation(getClass().getResource("/de/dfki/bullying/BullyingHelp.fxml"));
                             try {
@@ -174,6 +180,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
                         }
                     } else if (e.getButton().equals(MouseButton.PRIMARY)) {
                         bullyingVSMControlDoorBell = true;
+                        bullyingVSMControl = true;
                     }
                 }
             });
@@ -218,6 +225,15 @@ public class StickmanStageFX extends Application implements StickmanStage {
     public static Boolean returnbullyStartFlag() {
         return bullyStart;
     }
+    
+    public static void setgoTOExperience(Boolean b) {
+        goTOExperience = b;
+    }
+
+    public static Boolean returngoTOExperience() {
+        return goTOExperience;
+    }
+    
 
     public static void setbullyStart(Boolean b) {
         bullyStart = b;

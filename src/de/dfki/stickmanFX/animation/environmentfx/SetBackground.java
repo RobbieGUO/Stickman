@@ -30,6 +30,7 @@ public class SetBackground extends AnimationFX {
             add("door");
             add("school");
             add("road");
+            add("classroom");
         }
     };
 
