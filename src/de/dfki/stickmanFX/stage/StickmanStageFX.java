@@ -153,12 +153,9 @@ public class StickmanStageFX extends Application implements StickmanStage {
                 @Override
                 public void handle(MouseEvent e) {
                     if (e.getButton().equals(MouseButton.SECONDARY)) {
-                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test");
-                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test2222222" + bullyingStageControl + "    "+bullyingVSMControlDoorBell );
                         if (bullyingStageControl && bullyingVSMControlDoorBell) {
                             bullyingVSMControl = false;
                             bullyingStageControl = false;
-                            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test2222222");
                             
                             FXMLLoader loader = new FXMLLoader();
                             loader.setLocation(getClass().getResource("/de/dfki/bullying/BullyingHelp.fxml"));
