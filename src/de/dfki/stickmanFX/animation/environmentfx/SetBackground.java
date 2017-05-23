@@ -2,8 +2,6 @@ package de.dfki.stickmanFX.animation.environmentfx;
 
 import de.dfki.stickmanFX.StickmanFX;
 import de.dfki.stickmanFX.animationlogic.AnimationFX;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
@@ -39,6 +37,7 @@ public class SetBackground extends AnimationFX {
 
         String sParameter = (String) mParameter;
         sParameter = sParameter.trim();
+        sParameter = sParameter.replace("\\", "/");
         String mStageIdentifier = mStickmanFX.getStickmanStageController().getStageIdentifier();
         HBox mStickmanPane;
         try {
