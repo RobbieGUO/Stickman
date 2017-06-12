@@ -28,7 +28,7 @@ public class Blink extends AnimationFX {
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyeFX, "shape", "BLINK"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightEyeFX, "shape", "BLINK"));
         //Platform.runLater(() -> playAnimationPart(20));
-        playAnimationPart(20);
+        playAnimationPart(1000);
 
         pauseAnimation(300);
 

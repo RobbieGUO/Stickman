@@ -19,6 +19,10 @@ import javafx.scene.transform.Affine;
  */
 public class HeadFX extends BodyPartFX {
 
+    public static enum TURNCONTROL {
+        FRONT, LEFT, RIGHT
+    };
+
     public Dimension mSize = new Dimension(120, 100);
     public StickmanFX mStickmanFX;
 
@@ -33,6 +37,8 @@ public class HeadFX extends BodyPartFX {
     Path mHead, mLeftEar, mRightEar;
 
     public boolean translateRight = false;
+
+    public HeadFX.TURNCONTROL mTurn = HeadFX.TURNCONTROL.FRONT;
 
     public HeadFX(StickmanFX sm) {
         mStickmanFX = sm;
@@ -51,6 +57,12 @@ public class HeadFX extends BodyPartFX {
         calculate(0);
     }
 
+    @Override
+    public void setShape(String s) {
+        HeadFX.TURNCONTROL shape = HeadFX.TURNCONTROL.valueOf(s);
+        mTurn = (shape != null) ? shape : HeadFX.TURNCONTROL.FRONT;
+    }
+
     public Point getLeftEyebrowPostion() {
         return new Point(mHalfWidth + 23, mHalfHeight - 16);
     }
@@ -64,11 +76,13 @@ public class HeadFX extends BodyPartFX {
     }
 
     public Point getLeftEyePostion() {
-        return new Point(mHalfWidth + 32, mHalfHeight - 8);
+//        return new Point(mHalfWidth + 32, mHalfHeight - 8);
+        return new Point(mHalfWidth + 23, mHalfHeight - 3);
     }
 
     public Point getRightEyePostion() {
-        return new Point(mHalfWidth - 20, mHalfHeight - 8);
+//        return new Point(mHalfWidth - 20, mHalfHeight - 8);
+        return new Point(mHalfWidth - 11, mHalfHeight - 3);
     }
 
     public Point getMouthPostion() {
@@ -114,37 +128,110 @@ public class HeadFX extends BodyPartFX {
         mHead.getTransforms().clear();
         mHead.getTransforms().add(af);
 
-        //left ear
-        mLeftEar = new Path();
-        mLeftEar.getElements().add(new MoveTo(10, mSize.height / 2 + 10));
-        mLeftEar.getElements().add(new QuadCurveTo(7, mSize.height / 2, 10, mSize.height / 2 - 10));
-        mLeftEar.getElements().add(new CubicCurveTo(0, mSize.height / 2 - 10, 0, mSize.height / 2 + 10, 10, mSize.height / 2 + 10));
+        switch (mTurn) {
+            case FRONT:
+                //left ear
+                mLeftEar = new Path();
+                mLeftEar.getElements().add(new MoveTo(10, mSize.height / 2 + 10));
+                mLeftEar.getElements().add(new QuadCurveTo(7, mSize.height / 2, 10, mSize.height / 2 - 10));
+                mLeftEar.getElements().add(new CubicCurveTo(0, mSize.height / 2 - 10, 0, mSize.height / 2 + 10, 10, mSize.height / 2 + 10));
 
-        af = new Affine();
-        af.appendRotation(mRotation, mDefaultRotationPoint.x, mDefaultRotationPoint.y);
-        if (translateRight) {
-            af.appendTranslation(mTranslation - 45, -45);
-        } else {
-            af.appendTranslation(1, 3 + mTranslation);
-        }
-        mLeftEar.getTransforms().clear();
-        mLeftEar.getTransforms().add(af);
+                af = new Affine();
+                af.appendRotation(mRotation, mDefaultRotationPoint.x, mDefaultRotationPoint.y);
+                if (translateRight) {
+                    af.appendTranslation(mTranslation - 45, -45);
+                } else {
+                    af.appendTranslation(1, 3 + mTranslation);
+                }
+                mLeftEar.getTransforms().clear();
+                mLeftEar.getTransforms().add(af);
 //
-        //right ear
-        mRightEar = new Path();
-        mRightEar.getElements().add(new MoveTo(mSize.width, mSize.height / 2 + 10));
-        mRightEar.getElements().add(new QuadCurveTo(mSize.width + 3, mSize.height / 2, mSize.width, mSize.height / 2 - 10));
-        mRightEar.getElements().add(new CubicCurveTo(mSize.width + 10, mSize.height / 2 - 10, mSize.width + 10, mSize.height / 2 + 10, mSize.width, mSize.height / 2 + 10));
+                //right ear
+                mRightEar = new Path();
+                mRightEar.getElements().add(new MoveTo(mSize.width, mSize.height / 2 + 10));
+                mRightEar.getElements().add(new QuadCurveTo(mSize.width + 3, mSize.height / 2, mSize.width, mSize.height / 2 - 10));
+                mRightEar.getElements().add(new CubicCurveTo(mSize.width + 10, mSize.height / 2 - 10, mSize.width + 10, mSize.height / 2 + 10, mSize.width, mSize.height / 2 + 10));
 
-        af = new Affine();
-        af.appendRotation(mRotation, mDefaultRotationPoint.x, mDefaultRotationPoint.y);
-        if (translateRight) {
-            af.appendTranslation(mTranslation - 45, -45);
-        } else {
-            af.appendTranslation(-1, 3 + mTranslation);
+                af = new Affine();
+                af.appendRotation(mRotation, mDefaultRotationPoint.x, mDefaultRotationPoint.y);
+                if (translateRight) {
+                    af.appendTranslation(mTranslation - 45, -45);
+                } else {
+                    af.appendTranslation(-1, 3 + mTranslation);
+                }
+                mRightEar.getTransforms().clear();
+                mRightEar.getTransforms().add(af);
+                break;
+                
+                case LEFT:
+                //right ear
+                mLeftEar = new Path();
+                mLeftEar.getElements().add(new MoveTo(10 + 30, mSize.height / 2 + 10));
+                mLeftEar.getElements().add(new QuadCurveTo(7+ 30, mSize.height / 2, 10+ 30, mSize.height / 2 - 10));
+                mLeftEar.getElements().add(new CubicCurveTo(0+ 30, mSize.height / 2 - 10, 0+ 30, mSize.height / 2 + 10, 10+ 30, mSize.height / 2 + 10));
+
+                af = new Affine();
+                af.appendRotation(mRotation, mDefaultRotationPoint.x, mDefaultRotationPoint.y);
+                if (translateRight) {
+                    af.appendTranslation(mTranslation - 45, -45);
+                } else {
+                    af.appendTranslation(1, 3 + mTranslation);
+                }
+                mLeftEar.getTransforms().clear();
+                mLeftEar.getTransforms().add(af);
+//
+                //left ear
+                mRightEar = new Path();
+//                mRightEar.getElements().add(new MoveTo(mSize.width, mSize.height / 2 + 10));
+//                mRightEar.getElements().add(new QuadCurveTo(mSize.width + 3, mSize.height / 2, mSize.width, mSize.height / 2 - 10));
+//                mRightEar.getElements().add(new CubicCurveTo(mSize.width + 10, mSize.height / 2 - 10, mSize.width + 10, mSize.height / 2 + 10, mSize.width, mSize.height / 2 + 10));
+
+                af = new Affine();
+                af.appendRotation(mRotation, mDefaultRotationPoint.x, mDefaultRotationPoint.y);
+                if (translateRight) {
+                    af.appendTranslation(mTranslation - 45, -45);
+                } else {
+                    af.appendTranslation(-1, 3 + mTranslation);
+                }
+                mRightEar.getTransforms().clear();
+                mRightEar.getTransforms().add(af);
+                break;
+                
+                case RIGHT:
+                //right ear
+                mLeftEar = new Path();
+//                mLeftEar.getElements().add(new MoveTo(7, mSize.height / 2 + 10));
+//                mLeftEar.getElements().add(new QuadCurveTo(7, mSize.height / 2, 7, mSize.height / 2 - 10));
+//                mLeftEar.getElements().add(new CubicCurveTo(0, mSize.height / 2 - 10, 0, mSize.height / 2 + 10, 7, mSize.height / 2 + 10));
+
+                af = new Affine();
+                af.appendRotation(mRotation, mDefaultRotationPoint.x, mDefaultRotationPoint.y);
+                if (translateRight) {
+                    af.appendTranslation(mTranslation - 45, -45);
+                } else {
+                    af.appendTranslation(1, 3 + mTranslation);
+                }
+                mLeftEar.getTransforms().clear();
+                mLeftEar.getTransforms().add(af);
+//
+                //left ear
+                mRightEar = new Path();
+                mRightEar.getElements().add(new MoveTo(mSize.width -30, mSize.height / 2 + 10));
+                mRightEar.getElements().add(new QuadCurveTo(mSize.width -30 + 3, mSize.height / 2, mSize.width-30, mSize.height / 2 - 10));
+                mRightEar.getElements().add(new CubicCurveTo(mSize.width -30 + 10, mSize.height / 2 - 10, mSize.width-30 + 10, mSize.height / 2 + 10, mSize.width-30, mSize.height / 2 + 10));
+
+                af = new Affine();
+                af.appendRotation(mRotation, mDefaultRotationPoint.x, mDefaultRotationPoint.y);
+                if (translateRight) {
+                    af.appendTranslation(mTranslation - 45, -45);
+                } else {
+                    af.appendTranslation(-1, 3 + mTranslation);
+                }
+                mRightEar.getTransforms().clear();
+                mRightEar.getTransforms().add(af);
+                break;
+
         }
-        mRightEar.getTransforms().clear();
-        mRightEar.getTransforms().add(af);
 
         // TODO - This schould be done in all bodyparts
         //????????????????????????????????????????

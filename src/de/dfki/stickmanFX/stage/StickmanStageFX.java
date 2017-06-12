@@ -61,6 +61,8 @@ public class StickmanStageFX extends Application implements StickmanStage {
     private static String userGender = null;
     private static int userAge = 0;
 
+    private static Boolean billyHouse = true;
+
     private Boolean bullyingStageControl = true;
 
     public StickmanStageFX() { // This cannot be private because of
@@ -134,6 +136,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
 
         Platform.runLater(() -> {
             bullyingVSMControlDoorBell = false;
+            billyHouse = false;
             goTOExperience = false;
             bullyStart = false;
             Scene stageScene = new Scene(root);
@@ -153,10 +156,11 @@ public class StickmanStageFX extends Application implements StickmanStage {
                 @Override
                 public void handle(MouseEvent e) {
                     if (e.getButton().equals(MouseButton.SECONDARY)) {
-                        if (bullyingStageControl && bullyingVSMControlDoorBell) {
+                        setBillyHouseFlag(Boolean.FALSE);
+//                        if (bullyingStageControl && bullyingVSMControlDoorBell) {
                             bullyingVSMControl = false;
                             bullyingStageControl = false;
-                            
+
                             FXMLLoader loader = new FXMLLoader();
                             loader.setLocation(getClass().getResource("/de/dfki/bullying/BullyingHelp.fxml"));
                             try {
@@ -174,7 +178,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
                             } catch (IOException ex) {
                                 Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        }
+//                        }
                     } else if (e.getButton().equals(MouseButton.PRIMARY)) {
                         bullyingVSMControlDoorBell = true;
                         bullyingVSMControl = true;
@@ -203,6 +207,14 @@ public class StickmanStageFX extends Application implements StickmanStage {
         });
     }
 
+    public static void setBillyHouseFlag(Boolean b) {
+        billyHouse = b;
+    }
+
+    public static Boolean returnBillyHouseFlag() {
+        return billyHouse;
+    }
+
     public void changeBullyingStageFlag() {
         bullyingStageControl = true;
     }
@@ -218,11 +230,15 @@ public class StickmanStageFX extends Application implements StickmanStage {
     public static Boolean bullyingVSMControlDoorBell() {
         return bullyingVSMControlDoorBell;
     }
+    
+    public static void setbullyingVSMControlDoorBell(Boolean b) {
+        bullyingVSMControlDoorBell = b;
+    }
 
     public static Boolean returnbullyStartFlag() {
         return bullyStart;
     }
-    
+
     public static void setgoTOExperience(Boolean b) {
         goTOExperience = b;
     }
@@ -230,7 +246,6 @@ public class StickmanStageFX extends Application implements StickmanStage {
     public static Boolean returngoTOExperience() {
         return goTOExperience;
     }
-    
 
     public static void setbullyStart(Boolean b) {
         bullyStart = b;

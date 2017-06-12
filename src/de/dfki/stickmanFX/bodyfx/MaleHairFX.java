@@ -19,6 +19,9 @@ import javafx.scene.transform.Affine;
  */
 public class MaleHairFX extends BodyPartFX {
 
+    public static enum TURNCONTROL {
+        FRONT, LEFT, RIGHT
+    };
     public Dimension mSize = new Dimension(120, 100);
     public StickmanFX mStickmanFX;
 
@@ -27,6 +30,8 @@ public class MaleHairFX extends BodyPartFX {
     int mEarWidth = 10;
 
     Path mMaleHair;
+
+    public MaleHairFX.TURNCONTROL mTurn = MaleHairFX.TURNCONTROL.FRONT;
 
     public MaleHairFX(StickmanFX sm) {
         mStickmanFX = sm;
@@ -40,18 +45,39 @@ public class MaleHairFX extends BodyPartFX {
 
         calculate(0);
     }
+    
+    @Override
+    public void setShape(String s) {
+        MaleHairFX.TURNCONTROL shape = MaleHairFX.TURNCONTROL.valueOf(s);
+        mTurn = (shape != null) ? shape : MaleHairFX.TURNCONTROL.FRONT;
+    }
 
     public void calculate(int step) {
         Affine af = new Affine();
         clearChildren(this);
 
-        // male hair
-        mMaleHair = new Path();
-        mMaleHair.getElements().add(new MoveTo(mEarWidth, mHalfHeight));
-        mMaleHair.getElements().add(new QuadCurveTo(mHalfWidth - 30, -mHalfHeight / 3, mHalfWidth + 20, mHalfHeight - 30));
-        mMaleHair.getElements().add(new QuadCurveTo((mHalfWidth + 40 + mSize.width) / 2, 0, mSize.width, mHalfHeight));
-        mMaleHair.getElements().add(new CubicCurveTo(mSize.width, -mHalfHeight / 2, mEarWidth, -mHalfHeight / 2, mEarWidth, mHalfHeight));
-
+        switch (mTurn) {
+            // male hair
+            case FRONT:
+                mMaleHair = new Path();
+                mMaleHair.getElements().add(new MoveTo(mEarWidth, mHalfHeight));
+                mMaleHair.getElements().add(new QuadCurveTo(mHalfWidth - 30, -mHalfHeight / 3, mHalfWidth + 20, mHalfHeight - 30));
+                mMaleHair.getElements().add(new QuadCurveTo((mHalfWidth + 40 + mSize.width) / 2, 0, mSize.width, mHalfHeight));
+                mMaleHair.getElements().add(new CubicCurveTo(mSize.width, -mHalfHeight / 2, mEarWidth, -mHalfHeight / 2, mEarWidth, mHalfHeight));
+                break;
+            case LEFT:
+                mMaleHair = new Path();
+                mMaleHair.getElements().add(new MoveTo(mEarWidth + 10, mHalfHeight-30));
+                mMaleHair.getElements().add(new QuadCurveTo((mEarWidth + mSize.width) / 2, -20, mSize.width -10, mHalfHeight-30));
+                mMaleHair.getElements().add(new QuadCurveTo((mEarWidth + mSize.width) / 2, 15, mEarWidth + 10, mHalfHeight-30));
+                break;
+            case RIGHT:
+                mMaleHair = new Path();
+                mMaleHair.getElements().add(new MoveTo(mEarWidth + 10, mHalfHeight-30));
+                mMaleHair.getElements().add(new QuadCurveTo((mEarWidth + mSize.width) / 2, -20, mSize.width -10, mHalfHeight-30));
+                mMaleHair.getElements().add(new QuadCurveTo((mEarWidth + mSize.width) / 2, 15, mEarWidth + 10, mHalfHeight-30));
+                break;
+        }
         // move it downwards a bit
         af = new Affine();
         af.appendRotation(mRotation, mDefaultRotationPoint.x, mDefaultRotationPoint.y);

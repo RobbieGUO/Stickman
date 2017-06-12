@@ -516,7 +516,7 @@ public class StickmanFX extends Pane implements Stickman {
         }
     }
 
-    private void updateAll() {
+    public void updateAll() {
         // draw body parts
         if (starShowControler == true) {
             // Added by Robbie, to show stars or words here.

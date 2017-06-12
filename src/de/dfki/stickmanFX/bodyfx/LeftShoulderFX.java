@@ -25,6 +25,10 @@ import javafx.scene.transform.Affine;
  */
 public class LeftShoulderFX extends BodyPartFX {
 
+    public static enum TURNCONTROL {
+        FRONT, LEFT, RIGHT
+    };
+    public LeftShoulderFX.TURNCONTROL mTurn = LeftShoulderFX.TURNCONTROL.FRONT;
     BodyFX mBodyFX;
 
     int mShoulderLength;
@@ -54,6 +58,12 @@ public class LeftShoulderFX extends BodyPartFX {
         calculate(0);
     }
 
+    @Override
+    public void setShape(String s) {
+        LeftShoulderFX.TURNCONTROL shape = LeftShoulderFX.TURNCONTROL.valueOf(s);
+        mTurn = (shape != null) ? shape : LeftShoulderFX.TURNCONTROL.FRONT;
+    }
+
     public Point getLeftShoulderEndPosition() {
         //return (mShoulder != null) ? new Point((int) (mShoulder.boundsInParentProperty().get().getMaxX() - 1), (int) mShoulder.boundsInParentProperty().get().getMaxY() - 1) : new Point(0, 0);
         if (mRotation >= 0 && mRotation <= 90) {
@@ -73,10 +83,19 @@ public class LeftShoulderFX extends BodyPartFX {
         mStart = mBodyFX.getLeftArmStartPostion();
         mEnd = new Point(mStart.x, mStart.y + mShoulderLength);
         clearChildren(this);
+        mShoulder = new Path();
+        switch (mTurn) {
+            case FRONT:
+                mShoulder.getElements().add(new MoveTo(mStart.x, mStart.y + 2));
+                mShoulder.getElements().add(new QuadCurveTo(mStart.x, (mStart.y + mEnd.y) / 2, mEnd.x, mEnd.y));
+                break;
+            case LEFT:
 
-        mShoulder.getElements().add(new MoveTo(mStart.x, mStart.y + 2));
-        mShoulder.getElements().add(new QuadCurveTo(mStart.x, (mStart.y + mEnd.y) / 2, mEnd.x, mEnd.y));
+                break;
+            case RIGHT:
 
+                break;
+        }
         Affine af = new Affine();
         af.appendRotation(mRotation, mStart.x, mStart.y);
         mShoulder.getTransforms().clear();

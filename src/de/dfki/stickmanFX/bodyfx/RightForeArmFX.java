@@ -23,6 +23,12 @@ import javafx.scene.transform.Affine;
  */
 public class RightForeArmFX extends BodyPartFX {
 
+    public static enum TURNCONTROL {
+        FRONT, LEFT, RIGHT
+    };
+
+    public RightForeArmFX.TURNCONTROL mTurn = RightForeArmFX.TURNCONTROL.FRONT;
+
     RightUpperArmFX mUpperArmFX;
     int mArmLength = 80;
     Dimension mSize = new Dimension(mArmLength, mArmLength);
@@ -45,6 +51,12 @@ public class RightForeArmFX extends BodyPartFX {
         calculate(0);
     }
 
+    @Override
+    public void setShape(String s) {
+        RightForeArmFX.TURNCONTROL shape = RightForeArmFX.TURNCONTROL.valueOf(s);
+        mTurn = (shape != null) ? shape : RightForeArmFX.TURNCONTROL.FRONT;
+    }
+
     public Point getHandStartPosition() {
         //return (mArm != null) ? new Point((int) mArm.boundsInParentProperty().get().getMaxX(), (int) mArm.boundsInParentProperty().get().getMaxY()) : new Point(0, 0);
         if (mRotation >= 0 && mRotation <= 90) {
@@ -65,9 +77,18 @@ public class RightForeArmFX extends BodyPartFX {
         mStart = mUpperArmFX.getRightUpperArmEndPosition();
         mEnd = new Point(mStart.x, mStart.y + mArmLength);
 
-        mArm.getElements().add(new MoveTo(mStart.x, mStart.y + 2));
-        mArm.getElements().add(new QuadCurveTo(mStart.x - 5, (mStart.y + mEnd.y) / 2, mEnd.x, mEnd.y));
+        switch (mTurn) {
+            case FRONT:
+                mArm.getElements().add(new MoveTo(mStart.x, mStart.y + 2));
+                mArm.getElements().add(new QuadCurveTo(mStart.x - 5, (mStart.y + mEnd.y) / 2, mEnd.x, mEnd.y));
+                break;
+            case LEFT:
 
+                break;
+            case RIGHT:
+
+                break;
+        }
         Affine af = new Affine();
         af.appendRotation(mRotation, mStart.x, mStart.y);
         mArm.getTransforms().clear();

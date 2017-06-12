@@ -20,7 +20,12 @@ import javafx.scene.shape.QuadCurveTo;
 public class MouthFX extends BodyPartFX {
 
     public static enum SHAPE {
-        DEFAULT, SMILE, SMILEEND, SAD, SADEND, ANGRY, ANGRYEND, ANGRYSMALLMOUTH, ANGRYSMALLMOUTHEND, SURPRISED, SURPRISEDEND, HAPPY, HAPPYEND, DISGUSTED, DISGUSTEDEND, CONTEMPT, CONTEMPTEND, EXCITED, EXCITEDEND, EMBARRASSED, EMBARRASSEDEND, FEAR, FEAREND, O, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN, TWELVE, THIRTEEN, FOURTEEN, NINETEEN, TWENTY,
+        DEFAULT, SMILE, SMILEEND, SAD, SADEND, ANGRY, ANGRYEND,
+        ANGRYSMALLMOUTH, ANGRYSMALLMOUTHEND, SURPRISED, SURPRISEDEND,
+        HAPPY, HAPPYEND, DISGUSTED, DISGUSTEDEND, CONTEMPT, CONTEMPTEND,
+        EXCITED, EXCITEDEND, EMBARRASSED, EMBARRASSEDEND, FEAR, FEAREND, O,
+        ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN,
+        TWELVE, THIRTEEN, FOURTEEN, NINETEEN, TWENTY, TURNRIGHT, TURNLEFT
     };
 
     HeadFX mHeadFX;
@@ -368,6 +373,53 @@ public class MouthFX extends BodyPartFX {
                 mPath.getElements().add(new MoveTo(mStart.x - mLength / 2.8, mStart.y));
                 mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2.8, mEnd.x - mLength / 6, mStart.y));
                 mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2, mStart.x - mLength / 2.8, mStart.y));
+                break;
+            case TURNRIGHT:
+                if (mHeadFX.mStickmanFX.setCharacterInvisible == true) {
+                    if (mHeadFX.mStickmanFX.fadeControler == true) // Added by Robbie
+                    {
+                        int fadeFactor = mHeadFX.mStickmanFX.mMouthFX.mShapeAnimationStep * 6;
+                        if (fadeFactor <= 12) {
+                            fadeFactor = 0;
+                        }
+                        mColor = Color.rgb(mHeadFX.mStickmanFX.mType == Gender.TYPE.FEMALE ? 64 : 32, 0, 0,
+                                (fadeFactor * 100 / 255) / 100f);
+                    } else {
+                        int fadeFactor = (20 - mHeadFX.mStickmanFX.mMouthFX.mShapeAnimationStep) * 6;
+                        if (fadeFactor >= 107) {
+                            mColor = mColorRecorder;
+                        } else {
+                            mColor = Color.rgb(mHeadFX.mStickmanFX.mType == Gender.TYPE.FEMALE ? 64 : 32, 0, 0, (fadeFactor * 100 / 255) / 100f);
+                        }
+                    }
+                }
+
+                mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y));
+                mPath.getElements().add(new QuadCurveTo(mStart.x- 43, mStart.y + 1, mStart.x - 40, mStart.y));
+                break;
+                
+                case TURNLEFT:
+                if (mHeadFX.mStickmanFX.setCharacterInvisible == true) {
+                    if (mHeadFX.mStickmanFX.fadeControler == true) // Added by Robbie
+                    {
+                        int fadeFactor = mHeadFX.mStickmanFX.mMouthFX.mShapeAnimationStep * 6;
+                        if (fadeFactor <= 12) {
+                            fadeFactor = 0;
+                        }
+                        mColor = Color.rgb(mHeadFX.mStickmanFX.mType == Gender.TYPE.FEMALE ? 64 : 32, 0, 0,
+                                (fadeFactor * 100 / 255) / 100f);
+                    } else {
+                        int fadeFactor = (20 - mHeadFX.mStickmanFX.mMouthFX.mShapeAnimationStep) * 6;
+                        if (fadeFactor >= 107) {
+                            mColor = mColorRecorder;
+                        } else {
+                            mColor = Color.rgb(mHeadFX.mStickmanFX.mType == Gender.TYPE.FEMALE ? 64 : 32, 0, 0, (fadeFactor * 100 / 255) / 100f);
+                        }
+                    }
+                }
+
+                mPath.getElements().add(new MoveTo(mStart.x + mLength + 25, mStart.y));
+                mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 1, mStart.x + mLength + 20, mStart.y));
                 break;
 
         }

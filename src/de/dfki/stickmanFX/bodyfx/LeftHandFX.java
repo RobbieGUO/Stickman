@@ -22,6 +22,11 @@ import javafx.scene.transform.Affine;
  */
 public class LeftHandFX extends BodyPartFX {
 
+    public static enum TURNCONTROL {
+        FRONT, LEFT, RIGHT
+    };
+
+    public LeftHandFX.TURNCONTROL mTurn = LeftHandFX.TURNCONTROL.FRONT;
     LeftForeArmFX mLeftForeArmFX;
     Path mHand;
     Affine af;
@@ -39,6 +44,12 @@ public class LeftHandFX extends BodyPartFX {
         mHand = new Path();
         this.getChildren().add(mHand);
         init();
+    }
+
+    @Override
+    public void setShape(String s) {
+        LeftHandFX.TURNCONTROL shape = LeftHandFX.TURNCONTROL.valueOf(s);
+        mTurn = (shape != null) ? shape : LeftHandFX.TURNCONTROL.FRONT;
     }
 
     @Override
@@ -72,15 +83,24 @@ public class LeftHandFX extends BodyPartFX {
             }
         }
 
-        mHand.getElements().add(new MoveTo(mStart.x, mStart.y));
-        mHand.getElements().add(new LineTo(mStart.x - 5, mStart.y));
-        mHand.getElements().add(new MoveTo(mStart.x, mStart.y));
-        mHand.getElements().add(new LineTo(mEnd.x, mEnd.y));
-        mHand.getElements().add(new MoveTo(mStart.x - 1, mStart.y));
-        mHand.getElements().add(new LineTo(mEnd.x - 3, mEnd.y - 2f));
-        mHand.getElements().add(new MoveTo(mStart.x + 1, mStart.y));
-        mHand.getElements().add(new LineTo(mEnd.x + 4, mEnd.y - 2f));
+        switch (mTurn) {
+            case FRONT:
+                mHand.getElements().add(new MoveTo(mStart.x, mStart.y));
+                mHand.getElements().add(new LineTo(mStart.x - 5, mStart.y));
+                mHand.getElements().add(new MoveTo(mStart.x, mStart.y));
+                mHand.getElements().add(new LineTo(mEnd.x, mEnd.y));
+                mHand.getElements().add(new MoveTo(mStart.x - 1, mStart.y));
+                mHand.getElements().add(new LineTo(mEnd.x - 3, mEnd.y - 2f));
+                mHand.getElements().add(new MoveTo(mStart.x + 1, mStart.y));
+                mHand.getElements().add(new LineTo(mEnd.x + 4, mEnd.y - 2f));
+                break;
+            case LEFT:
 
+                break;
+            case RIGHT:
+
+                break;
+        }
         this.getChildren().add(mHand);
         addToDrawObjects(mHand);
         this.update();

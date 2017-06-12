@@ -22,6 +22,12 @@ import javafx.scene.transform.Affine;
  */
 public class RightHandFX extends BodyPartFX {
 
+    public static enum TURNCONTROL {
+        FRONT, LEFT, RIGHT
+    };
+
+    public RightHandFX.TURNCONTROL mTurn = RightHandFX.TURNCONTROL.FRONT;
+
     RightForeArmFX mRightForeArmFX;
     Path mHand;
     Affine af;
@@ -40,6 +46,12 @@ public class RightHandFX extends BodyPartFX {
         this.getChildren().add(mHand);
 
         init();
+    }
+
+    @Override
+    public void setShape(String s) {
+        RightHandFX.TURNCONTROL shape = RightHandFX.TURNCONTROL.valueOf(s);
+        mTurn = (shape != null) ? shape : RightHandFX.TURNCONTROL.FRONT;
     }
 
     @Override
@@ -72,16 +84,24 @@ public class RightHandFX extends BodyPartFX {
                 //mColor = Color.rgb(80, 80, 80, (fadeFactor * 100 / 255) / 100f);
             }
         }
+        switch (mTurn) {
+            case FRONT:
+                mHand.getElements().add(new MoveTo(mStart.x, mStart.y));
+                mHand.getElements().add(new LineTo(mStart.x + 5, mStart.y));
+                mHand.getElements().add(new MoveTo(mStart.x, mStart.y));
+                mHand.getElements().add(new LineTo(mEnd.x, mEnd.y));
+                mHand.getElements().add(new MoveTo(mStart.x + 1, mStart.y));
+                mHand.getElements().add(new LineTo(mEnd.x + 4, mEnd.y - 2f));
+                mHand.getElements().add(new MoveTo(mStart.x - 1, mStart.y));
+                mHand.getElements().add(new LineTo(mEnd.x - 3, mEnd.y - 2f));
+                break;
+            case LEFT:
 
-        mHand.getElements().add(new MoveTo(mStart.x, mStart.y));
-        mHand.getElements().add(new LineTo(mStart.x + 5, mStart.y));
-        mHand.getElements().add(new MoveTo(mStart.x, mStart.y));
-        mHand.getElements().add(new LineTo(mEnd.x, mEnd.y));
-        mHand.getElements().add(new MoveTo(mStart.x + 1, mStart.y));
-        mHand.getElements().add(new LineTo(mEnd.x + 4, mEnd.y - 2f));
-        mHand.getElements().add(new MoveTo(mStart.x - 1, mStart.y));
-        mHand.getElements().add(new LineTo(mEnd.x - 3, mEnd.y - 2f));
+                break;
+            case RIGHT:
 
+                break;
+        }
         this.getChildren().add(mHand);
         addToDrawObjects(mHand);
         this.toFront();

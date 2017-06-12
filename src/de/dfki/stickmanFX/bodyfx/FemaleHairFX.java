@@ -33,6 +33,12 @@ public class FemaleHairFX extends BodyPartFX {
 
     Path mFemaleHair;
 
+    public static enum TURNCONTROL {
+        FRONT, LEFT, RIGHT
+    };
+
+    public FemaleHairFX.TURNCONTROL mTurn = FemaleHairFX.TURNCONTROL.FRONT;
+
     public FemaleHairFX(StickmanFX sm) {
         mStickmanFX = sm;
         mDefaultRotationPoint = new Point(mSize.width / 2, mSize.height);
@@ -45,26 +51,74 @@ public class FemaleHairFX extends BodyPartFX {
         calculate(0);
     }
 
+    @Override
+    public void setShape(String s) {
+        FemaleHairFX.TURNCONTROL shape = FemaleHairFX.TURNCONTROL.valueOf(s);
+        mTurn = (shape != null) ? shape : FemaleHairFX.TURNCONTROL.LEFT;
+    }
+
     public void calculate(int step) {
         Affine af = new Affine();
         clearChildren(this);
         //drawFemaleHair1();
-        //female hair
-        mFemaleHair = new Path();
-        mFemaleHair.getElements().add(new MoveTo(mStart.x, mSize.height + 20));
-        // right top locke
-        mFemaleHair.getElements().add(new QuadCurveTo(mEarWidth + 10, mSize.height, mEarWidth, mHalfHeight));
-        // top hair
-        mFemaleHair.getElements().add(new CubicCurveTo(mEarWidth + 20, -mHalfHeight / 8, mSize.width - 20, -mHalfHeight / 8, mSize.width, mHalfHeight));
-        // left top locke
-        mFemaleHair.getElements().add(new QuadCurveTo(mEarWidth + mSize.width - 20, mSize.height, mSize.width + mEarWidth, mSize.height + 20));
-        // left down locke
-        mFemaleHair.getElements().add(new QuadCurveTo(mSize.width - 10, mSize.height + 30, mSize.width - 10, mSize.height + 20));
-        // forehead hair
-        mFemaleHair.getElements().add(new CubicCurveTo(mSize.width + 30, -mHalfHeight / 4, mStart.x - 20, -mHalfHeight / 4, mEarWidth + 10, mSize.height + 20));
-        // right down locke
-        mFemaleHair.getElements().add(new QuadCurveTo(20, mSize.height + 30, mStart.x, mSize.height + 20));
 
+        switch (mTurn) {
+            // male hair
+            case FRONT:
+                //female hair
+                mFemaleHair = new Path();
+                
+                mFemaleHair = new Path();               
+               
+                mFemaleHair.getElements().add(new MoveTo(mStart.x, mSize.height + 20));
+                // right top locke
+                mFemaleHair.getElements().add(new QuadCurveTo(mEarWidth + 10, mSize.height, mEarWidth, mHalfHeight));
+                // top hair
+                mFemaleHair.getElements().add(new CubicCurveTo(mEarWidth + 20, -mHalfHeight / 8, mSize.width - 20, -mHalfHeight / 8, mSize.width, mHalfHeight));
+                // left top locke
+                mFemaleHair.getElements().add(new QuadCurveTo(mEarWidth + mSize.width - 20, mSize.height, mSize.width + mEarWidth, mSize.height + 20));
+                // left down locke
+                mFemaleHair.getElements().add(new QuadCurveTo(mSize.width - 10, mSize.height + 30, mSize.width - 10, mSize.height + 20));
+                // forehead hair
+                mFemaleHair.getElements().add(new CubicCurveTo(mSize.width + 30, -mHalfHeight / 4, mStart.x - 20, -mHalfHeight / 4, mEarWidth + 10, mSize.height + 20));
+                // right down locke
+                mFemaleHair.getElements().add(new QuadCurveTo(20, mSize.height + 30, mStart.x, mSize.height + 20));
+                break;
+                
+                case LEFT:
+                //female hair                             
+                mFemaleHair = new Path();
+//                mFemaleHair.getElements().add(new MoveTo(mStart.x + 10, mSize.height + 30));
+//                mFemaleHair.getElements().add(new QuadCurveTo(mStart.x + 10 , mSize.height - 50, mSize.width-20 , mHalfHeight - 20));           
+//                mFemaleHair.getElements().add(new QuadCurveTo(mStart.x -5 , mSize.height - 120, mStart.x + 10, mSize.height + 30));
+                
+                mFemaleHair.getElements().add(new MoveTo(mStart.x + 14, mHalfHeight+ 40));
+                mFemaleHair.getElements().add(new CubicCurveTo(mStart.x+ 10 , mSize.height - 50, mStart.x+ 10 , mSize.height - 100, mSize.width-20 , mHalfHeight - 22));
+                mFemaleHair.getElements().add(new QuadCurveTo(mStart.x + 100 , mSize.height/2, mStart.x + 20, mHalfHeight+ 40));
+                
+                mFemaleHair.getElements().add(new QuadCurveTo(mStart.x + 30, mSize.height + 17, mStart.x + 20, mSize.height + 30));
+                mFemaleHair.getElements().add(new QuadCurveTo(mStart.x, mSize.height + 20, mStart.x + 14, mHalfHeight+ 40));
+                
+//                mFemaleHair.getElements().add(new MoveTo(mStart.x, mStart.y));
+//                mFemaleHair.getElements().add(new LineTo(mStart.x + 100, mSize.height));
+                break;
+                
+                case RIGHT:
+                //female hair
+                mFemaleHair = new Path();
+//                mFemaleHair.getElements().add(new MoveTo(mStart.x + mSize.width  , mSize.height + 30));
+//                mFemaleHair.getElements().add(new QuadCurveTo(mStart.x + mSize.width , mSize.height - 50, mStart.x + 30 , mHalfHeight - 20));           
+//                mFemaleHair.getElements().add(new QuadCurveTo(mStart.x + 15 + mSize.width , mSize.height - 120, mStart.x + mSize.width , mSize.height + 30));
+                
+                mFemaleHair.getElements().add(new MoveTo(mStart.x + mSize.width - 5, mHalfHeight+ 40));
+                mFemaleHair.getElements().add(new CubicCurveTo(mStart.x + mSize.width + 2 , mSize.height - 50, mStart.x + mSize.width + 2 , mSize.height - 100, mStart.x + 30 , mHalfHeight - 22));
+                mFemaleHair.getElements().add(new QuadCurveTo(mStart.x + 30 , mSize.height/2, mStart.x + mSize.width - 11, mHalfHeight+ 40));
+//                
+                mFemaleHair.getElements().add(new QuadCurveTo(mStart.x + mSize.width - 21, mSize.height + 17, mStart.x + mSize.width - 11, mSize.height + 30));
+                mFemaleHair.getElements().add(new QuadCurveTo(mStart.x + mSize.width + 10, mSize.height + 20, mStart.x + mSize.width - 5, mHalfHeight+ 40));
+                
+                break;
+        }
         // move it upwards a bit
         af = new Affine();
         af.appendRotation(mRotation, mDefaultRotationPoint.x, mDefaultRotationPoint.y);

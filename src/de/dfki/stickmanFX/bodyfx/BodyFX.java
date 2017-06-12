@@ -29,7 +29,12 @@ import javafx.scene.transform.Affine;
  */
 public class BodyFX extends Pane {
 
+    public static enum BODYSHAPE {
+        THIN, FAT, DEFAULT
+    };
     NeckFX mNeckFX;
+
+    public BodyFX.BODYSHAPE mShape = BodyFX.BODYSHAPE.DEFAULT;
 
     Dimension mSize = new Dimension(120, 300);
     int mHalfSizeX = mSize.width / 2;
@@ -48,7 +53,7 @@ public class BodyFX extends Pane {
     public float mColoropacityRest = (240 * 100 / 255) / 100f;
     public Color mFemaleColorRest = Color.rgb(154, 83, 198, mColoropacity);    // The color is changed in paintComponent
     public Color mMaleColorRest = Color.rgb(14, 134, 122, mColoropacity);
-    
+
     public Color mColor = mFemaleColor;
     public Color currentColor = null;
 
@@ -84,42 +89,81 @@ public class BodyFX extends Pane {
         this.mLefShoulderPosition = mNeckFX.mHeadFX.mStickmanFX.mLeftShoulderFX.getLeftShoulderEndPosition();       //Added by Beka
         this.mRightShoulderPosition = mNeckFX.mHeadFX.mStickmanFX.mRightShoulderFX.getRightShoulderEndPosition();
 
-        mFemaleBodyFront = new Path();
-        mFemaleBodyFront.getElements().add(new MoveTo(mStart.x, mStart.y));
-        mFemaleBodyFront.getElements().add(new LineTo(mLefShoulderPosition.x + 1, mLefShoulderPosition.y + 1));
-        mFemaleBodyFront.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mStart.x + mHalfSizeX, mSize.height + 10));
-        mFemaleBodyFront.getElements().add(new CubicCurveTo(mStart.x + mHalfSizeX - 40, mSize.height - 10, mStart.x - mHalfSizeX + 40, mSize.height + 20, mStart.x - mHalfSizeX, mSize.height));
-        mFemaleBodyFront.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mRightShoulderPosition.x, mRightShoulderPosition.y));
-
+        switch (mShape) {
+            case DEFAULT:
+                mFemaleBodyFront = new Path();
+                mFemaleBodyFront.getElements().add(new MoveTo(mStart.x, mStart.y));
+                mFemaleBodyFront.getElements().add(new LineTo(mLefShoulderPosition.x + 1, mLefShoulderPosition.y + 1));
+                mFemaleBodyFront.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mStart.x + mHalfSizeX, mSize.height + 10));
+                mFemaleBodyFront.getElements().add(new CubicCurveTo(mStart.x + mHalfSizeX - 40, mSize.height - 10, mStart.x - mHalfSizeX + 40, mSize.height + 20, mStart.x - mHalfSizeX, mSize.height));
+                mFemaleBodyFront.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mRightShoulderPosition.x, mRightShoulderPosition.y));
+                break;
+            case FAT:
+                mFemaleBodyFront = new Path();
+                mFemaleBodyFront.getElements().add(new MoveTo(mStart.x, mStart.y));
+                mFemaleBodyFront.getElements().add(new LineTo(mLefShoulderPosition.x + 1, mLefShoulderPosition.y + 1));
+                mFemaleBodyFront.getElements().add(new QuadCurveTo(mLefShoulderPosition.x + 30, mHalfSizeY + mDrawOffset, mStart.x + mHalfSizeX, mSize.height + 10));
+                mFemaleBodyFront.getElements().add(new CubicCurveTo(mStart.x + mHalfSizeX - 40, mSize.height - 10, mStart.x - mHalfSizeX + 40, mSize.height + 20, mStart.x - mHalfSizeX, mSize.height));
+                mFemaleBodyFront.getElements().add(new QuadCurveTo(mRightShoulderPosition.x - 30, mHalfSizeY + mDrawOffset, mRightShoulderPosition.x, mRightShoulderPosition.y));
+                break;
+            case THIN:
+                mFemaleBodyFront = new Path();
+                mFemaleBodyFront.getElements().add(new MoveTo(mStart.x, mStart.y));
+                mFemaleBodyFront.getElements().add(new LineTo(mLefShoulderPosition.x + 1, mLefShoulderPosition.y + 1));
+                mFemaleBodyFront.getElements().add(new QuadCurveTo(mLefShoulderPosition.x, mHalfSizeY + mDrawOffset, mStart.x + mHalfSizeX - 35, mSize.height + 10));
+                mFemaleBodyFront.getElements().add(new CubicCurveTo(mStart.x + mHalfSizeX - 40, mSize.height - 10, mStart.x - mHalfSizeX + 40, mSize.height + 20, mStart.x - mHalfSizeX + 35, mSize.height));
+                mFemaleBodyFront.getElements().add(new QuadCurveTo(mRightShoulderPosition.x, mHalfSizeY + mDrawOffset, mRightShoulderPosition.x, mRightShoulderPosition.y));
+                
+                break;
+        }
         mFemaleBodyLeft = new Path();
         mFemaleBodyLeft.getElements().add(new MoveTo(mStart.x, mStart.y));
-        mFemaleBodyLeft.getElements().add(new QuadCurveTo(mStart.x + mDrawOffset, mSize.height / 3 * 2, mStart.x, mSize.height));
-        mFemaleBodyLeft.getElements().add(new LineTo(mStart.x - mHalfSizeX, mSize.height));
+        mFemaleBodyLeft.getElements().add(new QuadCurveTo(mStart.x + mDrawOffset, mSize.height / 3 * 2, mStart.x + mHalfSizeX - 25, mSize.height));
+        mFemaleBodyLeft.getElements().add(new LineTo(mStart.x - mHalfSizeX + 25, mSize.height));
         mFemaleBodyLeft.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mStart.x, mStart.y));
 
         mFemaleBodyRight = new Path();
         mFemaleBodyRight.getElements().add(new MoveTo(mStart.x, mStart.y));
-        mFemaleBodyRight.getElements().add(new QuadCurveTo(mStart.x - mDrawOffset, mSize.height / 3 * 2, mStart.x, mSize.height));
-        mFemaleBodyRight.getElements().add(new LineTo(mStart.x + mHalfSizeX, mSize.height));
+        mFemaleBodyRight.getElements().add(new QuadCurveTo(mStart.x - mDrawOffset, mSize.height / 3 * 2, mStart.x- mHalfSizeX + 25, mSize.height));
+        mFemaleBodyRight.getElements().add(new LineTo(mStart.x + mHalfSizeX - 25, mSize.height));
         mFemaleBodyRight.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mStart.x, mStart.y));
 
-        mMaleBodyFront = new Path();
-        mMaleBodyFront.getElements().add(new MoveTo(mStart.x, mStart.y));
-        mMaleBodyFront.getElements().add(new LineTo(mLefShoulderPosition.x + 1, mLefShoulderPosition.y + 1));
-        mMaleBodyFront.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mStart.x + mHalfSizeX - mDrawOffset - 10, mSize.height));
-        mMaleBodyFront.getElements().add(new LineTo(mStart.x - mHalfSizeX + mDrawOffset + 10, mSize.height));
-        mMaleBodyFront.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mRightShoulderPosition.x, mRightShoulderPosition.y));
-
+        switch (mShape) {
+            case DEFAULT:
+                mMaleBodyFront = new Path();
+                mMaleBodyFront.getElements().add(new MoveTo(mStart.x, mStart.y));
+                mMaleBodyFront.getElements().add(new LineTo(mLefShoulderPosition.x + 1, mLefShoulderPosition.y + 1));
+                mMaleBodyFront.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mStart.x + mHalfSizeX - mDrawOffset - 10, mSize.height));
+                mMaleBodyFront.getElements().add(new LineTo(mStart.x - mHalfSizeX + mDrawOffset + 10, mSize.height));
+                mMaleBodyFront.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mRightShoulderPosition.x, mRightShoulderPosition.y));
+                break;
+            case FAT:
+                mMaleBodyFront = new Path();
+                mMaleBodyFront.getElements().add(new MoveTo(mStart.x, mStart.y));
+                mMaleBodyFront.getElements().add(new LineTo(mLefShoulderPosition.x + 1, mLefShoulderPosition.y + 1));
+                mMaleBodyFront.getElements().add(new QuadCurveTo(mLefShoulderPosition.x + 30, mHalfSizeY + mDrawOffset, mStart.x + mHalfSizeX - mDrawOffset - 10, mSize.height));
+                mMaleBodyFront.getElements().add(new LineTo(mStart.x - mHalfSizeX + mDrawOffset + 10, mSize.height));
+                mMaleBodyFront.getElements().add(new QuadCurveTo(mRightShoulderPosition.x - 30, mHalfSizeY + mDrawOffset, mRightShoulderPosition.x, mRightShoulderPosition.y));
+                break;
+            case THIN:
+                mMaleBodyFront = new Path();
+                mMaleBodyFront.getElements().add(new MoveTo(mStart.x, mStart.y));
+                mMaleBodyFront.getElements().add(new LineTo(mLefShoulderPosition.x + 1, mLefShoulderPosition.y + 1));
+                mMaleBodyFront.getElements().add(new QuadCurveTo(mLefShoulderPosition.x, mHalfSizeY + mDrawOffset, mStart.x + mHalfSizeX - mDrawOffset - 10, mSize.height));
+                mMaleBodyFront.getElements().add(new LineTo(mStart.x - mHalfSizeX + mDrawOffset + 10, mSize.height));
+                mMaleBodyFront.getElements().add(new QuadCurveTo(mRightShoulderPosition.x, mHalfSizeY + mDrawOffset, mRightShoulderPosition.x, mRightShoulderPosition.y));
+                break;
+        }
         mMaleBodyLeft = new Path();
         mMaleBodyLeft.getElements().add(new MoveTo(mStart.x, mStart.y));
-        mMaleBodyLeft.getElements().add(new QuadCurveTo(mStart.x + mDrawOffset, mSize.height / 3 * 2, mStart.x, mSize.height));
-        mMaleBodyLeft.getElements().add(new LineTo(mStart.x - mHalfSizeX + mDrawOffset, mSize.height));
+        mMaleBodyLeft.getElements().add(new QuadCurveTo(mStart.x + mDrawOffset, mSize.height / 3 * 2, mStart.x + mHalfSizeX - 25, mSize.height));
+        mMaleBodyLeft.getElements().add(new LineTo(mStart.x - mHalfSizeX + 25, mSize.height));
         mMaleBodyLeft.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mStart.x, mStart.y));
 
         mMaleBodyRight = new Path();
         mMaleBodyRight.getElements().add(new MoveTo(mStart.x, mStart.y));
-        mMaleBodyRight.getElements().add(new QuadCurveTo(mStart.x - mDrawOffset, mSize.height / 3 * 2, mStart.x, mSize.height));
-        mMaleBodyRight.getElements().add(new LineTo(mStart.x + mHalfSizeX - mDrawOffset, mSize.height));
+        mMaleBodyRight.getElements().add(new QuadCurveTo(mStart.x - mDrawOffset, mSize.height / 3 * 2, mStart.x - mHalfSizeX + 25, mSize.height));
+        mMaleBodyRight.getElements().add(new LineTo(mStart.x + mHalfSizeX - 25, mSize.height));
         mMaleBodyRight.getElements().add(new QuadCurveTo(mStart.x, mHalfSizeY + mDrawOffset, mStart.x, mStart.y));
 
         update();
@@ -135,7 +179,10 @@ public class BodyFX extends Pane {
 
     public Point getLeftLegStartPostion() {
         if (mNeckFX.mHeadFX.mStickmanFX.mOrientation == StickmanFX.ORIENTATION.LEFT) {
-            return new Point(mStart.x + mHalfSizeX - mDrawOffset, mSize.height);
+//            return new Point(mStart.x + mHalfSizeX - mDrawOffset, mSize.height);
+            return new Point(mStart.x, mSize.height);
+        } else if (mNeckFX.mHeadFX.mStickmanFX.mOrientation == StickmanFX.ORIENTATION.RIGHT) {
+            return new Point(mStart.x, mSize.height);
         } else {
             return new Point(mStart.x + mHalfSizeX - mDrawOffset - 20,
                     (mNeckFX.mHeadFX.mStickmanFX.mType == Gender.TYPE.FEMALE) ? mSize.height + 3 : mSize.height);
@@ -144,6 +191,8 @@ public class BodyFX extends Pane {
 
     public Point getRightLegStartPostion() {
         if (mNeckFX.mHeadFX.mStickmanFX.mOrientation == StickmanFX.ORIENTATION.RIGHT) {
+            return new Point(mStart.x, mSize.height);
+        } else if (mNeckFX.mHeadFX.mStickmanFX.mOrientation == StickmanFX.ORIENTATION.LEFT) {
             return new Point(mStart.x, mSize.height);
         } else {
             return new Point(mStart.x - mHalfSizeX + mDrawOffset + 20,

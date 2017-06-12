@@ -17,7 +17,9 @@ import javafx.scene.shape.QuadCurveTo;
 public class RightEyebrowFX extends BodyPartFX {
 
     public static enum SHAPE {
-        DEFAULT, ANGRY, ANGRYEND, DISGUSTED, DISGUSTEDEND, SURPRISED, SURPRISEDEND, EXCITED, EXCITEDEND, EMBARRASSED, EMBARRASSEDEND
+        DEFAULT, ANGRY, ANGRYEND, DISGUSTED, DISGUSTEDEND,
+        SURPRISED, SURPRISEDEND, EXCITED, EXCITEDEND, EMBARRASSED,
+        EMBARRASSEDEND, TURNRIGHT, TURNLEFT
     };
 
     HeadFX mHeadFX;
@@ -172,6 +174,13 @@ public class RightEyebrowFX extends BodyPartFX {
                     mPath.getElements().add(new MoveTo(mStart.x + movement / 2, mStart.y + movement / 3));
                     mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 2 + mEnd.x + movement / 2) / 2, mStart.y - 3 + movement / 10 * 7, mEnd.x + movement / 2, mEnd.y + movement / 2));
                 }
+                break;
+            case TURNRIGHT:
+
+                break;
+
+            case TURNLEFT:
+
                 break;
         }
 
