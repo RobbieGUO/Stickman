@@ -10,6 +10,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
+import javafx.scene.layout.AnchorPane;
 
 public class StagePaneHandlerFX {
 
@@ -18,6 +19,7 @@ public class StagePaneHandlerFX {
     private SplitPane mSplitPane;
     private HBox sStickmanPane;
     private StickmanStageController mStickmanStageController;
+    private AnchorPane InformationAnchorPane;
 
     public StagePaneHandlerFX() {
         if (ApplicationLauncherImpl.isRunning()) {
@@ -33,8 +35,10 @@ public class StagePaneHandlerFX {
         invoke();
         if (!root.getChildren().contains(mSplitPane)) {
             root.getChildren().remove(stickmanScrollPane);
+            root.getChildren().remove(InformationAnchorPane);
             root.getChildren().add(mSplitPane);
-            root.getChildren().add(stickmanScrollPane);
+            root.getChildren().add(InformationAnchorPane);
+            root.getChildren().add(stickmanScrollPane);            
         }
         sStickmanPane.setAlignment(Pos.CENTER_LEFT);
         return root;
@@ -56,6 +60,7 @@ public class StagePaneHandlerFX {
         root.getWidth();
         stickmanScrollPane = (ScrollPane) root.lookup("#stickmanScrollPane");
         mSplitPane = (SplitPane) root.lookup("#mSplitPane");
+        InformationAnchorPane = (AnchorPane) root.lookup("#InformationAnchorPane");
         sStickmanPane = new HBox();
         stickmanScrollPane.setContent(sStickmanPane);
         mStickmanStageController = loader.getController();

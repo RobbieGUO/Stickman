@@ -53,7 +53,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
     private LinkedList<String> stickmanNames = new LinkedList<>();
     private StagePaneHandlerFX generalConfigStageRoot;
 
-    private static Boolean bullyingVSMControl = true;
+    public static Boolean bullyingVSMControl = true;
     private static Boolean goTOExperience = false;
     private static Boolean bullyingVSMControlDoorBell = false;
     private static Boolean bullyStart = false;
@@ -63,7 +63,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
 
     private static Boolean billyHouse = true;
 
-    private Boolean bullyingStageControl = true;
+    public static Boolean bullyingStageControl = true;
 
     public StickmanStageFX() { // This cannot be private because of
         // ApplicationFX

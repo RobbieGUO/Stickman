@@ -19,7 +19,11 @@ public class testStickmanFX {
         stickmanStage.addStickman("Patrick");
         stickmanStage.addStickman("Anna");
 //        stickmanStage.launchConfiguration();
-        stickmanStage.launchStickmanStage(true);
-        stickmanStage.getStickman("Patrick").doAnimation("Beat", 500,true);
+         stickmanStage.launchStickmanStage(true);
+//         stickmanStage.getStickman("Patrick").doAnimation("LookLeft", 1000,true);
+//        stickmanStage.launchStickmanStage(true);
+//        stickmanStage.getStickman("Patrick").doAnimation("Blink", 4000,true);
+//        stickmanStage.getStickman("Patrick").doAnimation("LookLeft", 1000,true);
+//        stickmanStage.getStickman("Patrick").doAnimation("AngryLookStart", 100,true);
     }
 }

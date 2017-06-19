@@ -1,5 +1,6 @@
 package de.dfki.stickmanFX;
 
+import de.dfki.bullying.BullyingHelpController;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import de.dfki.stickmanFX.stage.StageRoomFX;
 import de.dfki.stickmanFX.stage.StickmansOnStageFX;
 import de.dfki.stickmanFX.xmlsettings.StickmanDataFX;
 import de.dfki.util.StickmanFillCombo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,6 +25,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
@@ -34,6 +39,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -149,7 +157,20 @@ public class StickmanStageController implements ViewController {
     private GridPane gridPaneControlBackground;
     @FXML
     private HBox StickmanFlowPane;
+    
+    
+    @FXML
+    private AnchorPane InformationAnchorPane;
 
+    @FXML
+    private TextArea InformationTextArea;
+    
+    @FXML
+    private Button MapButton;
+    
+    @FXML
+    private Button MessageButton;
+    
     @FXML
     private ScrollPane stickmanScrollPane;
 
@@ -509,6 +530,34 @@ public class StickmanStageController implements ViewController {
 //		mStickmanOnstage.clearStage();
                 ((StickmanStageFX) mStickmanOnstage.getStageStickman())
                         .clearStage(((StageRoomFX) mStickmanOnstage.getStageRoom()).CONFIG_STAGE);
+            }
+        });
+        
+        MapButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                StickmanStageFX.setBillyHouseFlag(Boolean.FALSE);
+//                        if (bullyingStageControl && bullyingVSMControlDoorBell) {
+                            StickmanStageFX.bullyingVSMControl = false;
+                            StickmanStageFX.bullyingStageControl = false;
+
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("/de/dfki/bullying/BullyingHelp.fxml"));
+                            try {
+                                AnchorPane bullyingroot = (AnchorPane) loader.load();
+                                Stage bullyingstage = new Stage();
+                                bullyingstage.setTitle("BullyingHelp");
+//                                bullyingstage.initOwner(stage);
+                                Scene bullyingscene = new Scene(bullyingroot);
+                                bullyingstage.setScene(bullyingscene);
+
+                                BullyingHelpController controller = loader.getController();
+                                controller.setDialogStage(bullyingstage, StickmanStageFX.getInstance());
+
+                                bullyingstage.showAndWait();
+                            }catch (IOException ex) {
+                                Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
+                            }
             }
         });
 
