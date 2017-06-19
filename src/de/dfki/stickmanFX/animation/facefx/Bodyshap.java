@@ -11,6 +11,7 @@ import de.dfki.stickmanFX.animationlogic.AnimationFX;
 import de.dfki.stickmanFX.bodyfx.BodyFX;
 import de.dfki.stickmanFX.bodyfx.FemaleHairFX;
 import java.util.ArrayList;
+import javafx.application.Platform;
 
 /**
  * An angry facial movement is created in this class. The face moves from the
@@ -42,12 +43,12 @@ public class Bodyshap extends AnimationFX {
     @Override
     public void playAnimation() {
 
-        String sParameter = (String) mParameter;
-         
-        BodyFX.BODYSHAPE shape = BodyFX.BODYSHAPE.valueOf(sParameter);
-        mStickmanFX.mBodyFX.mShape = (shape != null) ? shape : BodyFX.BODYSHAPE.DEFAULT;
-        mStickmanFX.update();
-
+        Platform.runLater(() -> {
+            String sParameter = (String) mParameter;
+            sParameter = sParameter.trim();
+            BodyFX.BODYSHAPE shape = BodyFX.BODYSHAPE.valueOf(sParameter);
+            mStickmanFX.mBodyFX.mShape = (shape != null) ? shape : BodyFX.BODYSHAPE.DEFAULT;
+            mStickmanFX.update();
+        });
     }
 }
-
