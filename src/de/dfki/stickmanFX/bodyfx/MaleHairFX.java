@@ -20,7 +20,7 @@ import javafx.scene.transform.Affine;
 public class MaleHairFX extends BodyPartFX {
 
     public static enum TURNCONTROL {
-        FRONT, LEFT, RIGHT
+        FRONT, LEFT, RIGHT, FRONTHAT
     };
     public Dimension mSize = new Dimension(120, 100);
     public StickmanFX mStickmanFX;
@@ -76,6 +76,13 @@ public class MaleHairFX extends BodyPartFX {
                 mMaleHair.getElements().add(new MoveTo(mEarWidth + 10, mHalfHeight-30));
                 mMaleHair.getElements().add(new QuadCurveTo((mEarWidth + mSize.width) / 2, -20, mSize.width -10, mHalfHeight-30));
                 mMaleHair.getElements().add(new QuadCurveTo((mEarWidth + mSize.width) / 2, 15, mEarWidth + 10, mHalfHeight-30));
+                break;
+            
+            case FRONTHAT:
+//                mMaleHair = new Path();
+//                mMaleHair.getElements().add(new MoveTo(mEarWidth + 10, mHalfHeight-30));
+//                mMaleHair.getElements().add(new QuadCurveTo((mEarWidth + mSize.width) / 2, -20, mSize.width -10, mHalfHeight-30));
+//                mMaleHair.getElements().add(new QuadCurveTo((mEarWidth + mSize.width) / 2, 15, mEarWidth + 10, mHalfHeight-30));
                 break;
         }
         // move it downwards a bit

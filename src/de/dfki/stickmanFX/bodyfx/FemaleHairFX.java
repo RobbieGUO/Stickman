@@ -54,7 +54,7 @@ public class FemaleHairFX extends BodyPartFX {
     @Override
     public void setShape(String s) {
         FemaleHairFX.TURNCONTROL shape = FemaleHairFX.TURNCONTROL.valueOf(s);
-        mTurn = (shape != null) ? shape : FemaleHairFX.TURNCONTROL.LEFT;
+        mTurn = (shape != null) ? shape : FemaleHairFX.TURNCONTROL.FRONT;
     }
 
     public void calculate(int step) {

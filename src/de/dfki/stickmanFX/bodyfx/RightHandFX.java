@@ -23,7 +23,7 @@ import javafx.scene.transform.Affine;
 public class RightHandFX extends BodyPartFX {
 
     public static enum TURNCONTROL {
-        FRONT, LEFT, RIGHT
+        FRONT, LEFT, RIGHT, FOOTBALL
     };
 
     public RightHandFX.TURNCONTROL mTurn = RightHandFX.TURNCONTROL.FRONT;
@@ -101,6 +101,12 @@ public class RightHandFX extends BodyPartFX {
             case RIGHT:
 
                 break;
+                
+            case FOOTBALL:
+
+                break;
+                
+                
         }
         this.getChildren().add(mHand);
         addToDrawObjects(mHand);

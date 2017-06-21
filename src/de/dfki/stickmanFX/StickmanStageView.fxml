@@ -280,6 +280,7 @@
             <TextArea fx:id="InformationTextArea" editable="false" layoutY="14.0" minWidth="200.0" prefHeight="402.0" prefWidth="300.0" wrapText="true" AnchorPane.bottomAnchor="184.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0" />
             <Button fx:id="MessageButton" layoutX="107.0" layoutY="499.0" mnemonicParsing="false" text="Message" AnchorPane.bottomAnchor="74.0" AnchorPane.rightAnchor="41.0" />
             <Button fx:id="MapButton" layoutX="107.0" layoutY="536.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="73.0" text="Map" AnchorPane.bottomAnchor="37.0" AnchorPane.rightAnchor="41.0" />
+            <Button fx:id="NextDialogButton" layoutX="114.0" layoutY="459.0" mnemonicParsing="false" text="Next Dialog" AnchorPane.bottomAnchor="114.0" AnchorPane.rightAnchor="41.0" />
          </children>
       </AnchorPane>
         <ScrollPane fx:id="stickmanScrollPane" />

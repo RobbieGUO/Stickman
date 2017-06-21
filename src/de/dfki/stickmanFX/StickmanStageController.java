@@ -172,6 +172,9 @@ public class StickmanStageController implements ViewController {
     private Button MessageButton;
     
     @FXML
+    private Button NextDialogButton;
+    
+    @FXML
     private ScrollPane stickmanScrollPane;
 
     @FXML
