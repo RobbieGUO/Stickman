@@ -16,8 +16,9 @@ import javafx.application.Platform;
  *
  * @author Robbie
  */
-public class FaceRight extends AnimationFX{
- public FaceRight() {
+public class FaceRight extends AnimationFX {
+
+    public FaceRight() {
         mAnimType = AnimationFX.ANIMTYPE.EmotionExpression;
     }
 
@@ -27,12 +28,12 @@ public class FaceRight extends AnimationFX{
 
     @Override
     public void playAnimation() {
-        
+
         int rotationUnit = 20;
-        
+
         //////// FaceFront first
         mAnimationPartFX = new ArrayList<>();
-        
+
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightEyeFX, "shape", "DEFAULT"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightEyebrowFX, "shape", "DEFAULT"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyeFX, "shape", "DEFAULT"));
@@ -40,20 +41,20 @@ public class FaceRight extends AnimationFX{
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMouthFX, "shape", "DEFAULT"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMaleHairFX, "shape", "FRONT"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mHeadFX, "shape", "FRONT"));
-        
+
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftShoulderFX, "shape", "FRONT"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftUpperArmFX, "shape", "FRONT"));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftForeArmFX, "shape", "FRONT" ));
+        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftForeArmFX, "shape", "FRONT"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftHandFX, "shape", "FRONT"));
-        
+
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightShoulderFX, "shape", "FRONT"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightUpperArmFX, "shape", "FRONT"));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightForeArmFX, "shape", "FRONT" ));
+        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightForeArmFX, "shape", "FRONT"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightHandFX, "shape", "FRONT"));
-        
-        if(mStickmanFX.mType ==Gender.TYPE.FEMALE){
+
+        if (mStickmanFX.mType == Gender.TYPE.FEMALE) {
             mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mFemaleHairFX, "shape", "FRONT"));
-        }else{
+        } else {
             mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMaleHairFX, "shape", "FRONT"));
         }
         playAnimationPart(50);
@@ -105,67 +106,62 @@ public class FaceRight extends AnimationFX{
 
             mStickmanFX.update();
         });
-        
-        
-        
-        //////// FaceRight
-        mAnimationPartFX = new ArrayList<>();
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftShoulderFX, "rotate", rotationUnit*2));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftUpperArmFX, "rotate", rotationUnit));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftForeArmFX, "rotate", rotationUnit ));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftHandFX, "rotate", rotationUnit));
-        
+
+        Platform.runLater(() -> {
+            //////// FaceRight
+            mAnimationPartFX = new ArrayList<>();
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftShoulderFX, "rotate", rotationUnit * 2));
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftUpperArmFX, "rotate", rotationUnit));
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftForeArmFX, "rotate", rotationUnit));
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftHandFX, "rotate", rotationUnit));
+
 //        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftShoulderFX, "shape", "RIGHT"));
 //        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftUpperArmFX, "shape", "RIGHT"));
 //        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftForeArmFX, "shape", "RIGHT" ));
 //        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftHandFX, "shape", "RIGHT"));
-        
-        
 //        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightShoulderFX, "rotate", -rotationUnit*6 + 6));
 //        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightUpperArmFX, "rotate", -rotationUnit-8));
 //        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightForeArmFX, "rotate", rotationUnit*4 ));
 //        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightHandFX, "rotate", rotationUnit*4));
-        
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightShoulderFX, "shape", "RIGHT"));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightUpperArmFX, "shape", "RIGHT"));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightForeArmFX, "shape", "RIGHT" ));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightHandFX, "shape", "RIGHT"));
-        
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyeFX, "shape", "TURNRIGHT"));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyebrowFX, "shape", "TURNRIGHT"));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMouthFX, "shape", "TURNRIGHT"));
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mHeadFX, "shape", "RIGHT"));
-        
-        if(mStickmanFX.mType ==Gender.TYPE.FEMALE){
-            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mFemaleHairFX, "shape", "RIGHT"));
-        }else{
-            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMaleHairFX, "shape", "RIGHT"));
-        }
-        
-        playAnimationPart(50);
-        
-        
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightShoulderFX, "shape", "RIGHT"));
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightUpperArmFX, "shape", "RIGHT"));
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightForeArmFX, "shape", "RIGHT"));
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightHandFX, "shape", "RIGHT"));
+
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyeFX, "shape", "TURNRIGHT"));
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyebrowFX, "shape", "TURNRIGHT"));
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMouthFX, "shape", "TURNRIGHT"));
+            mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mHeadFX, "shape", "RIGHT"));
+
+            if (mStickmanFX.mType == Gender.TYPE.FEMALE) {
+                mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mFemaleHairFX, "shape", "RIGHT"));
+            } else {
+                mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMaleHairFX, "shape", "RIGHT"));
+            }
+
+            playAnimationPart(50);
+        });
+
         Platform.runLater(() -> {
-        mStickmanFX.mOrientation = StickmanFX.ORIENTATION.LEFT;
-        mStickmanFX.mLeftUpperLegFX.calculate(0);
-        mStickmanFX.mLeftUpperLegFX.createShape();
-        mStickmanFX.mLeftForeLegFX.calculate(0);
-        mStickmanFX.mLeftForeLegFX.createShape();
-        
-        mStickmanFX.mRightUpperLegFX.calculate(0);
-        mStickmanFX.mRightUpperLegFX.createShape();
-        
-        mStickmanFX.mRightForeLegFX.calculate(0);
-        mStickmanFX.mRightForeLegFX.createShape();
-        
-        mStickmanFX.mLeftFootFX.calculate(0);
-        mStickmanFX.mLeftFootFX.createShape();
-        
-        mStickmanFX.mRightFootFX.calculate(0);
-        mStickmanFX.mRightFootFX.createShape();
-        mStickmanFX.update();
+            mStickmanFX.mOrientation = StickmanFX.ORIENTATION.LEFT;
+            mStickmanFX.mLeftUpperLegFX.calculate(0);
+            mStickmanFX.mLeftUpperLegFX.createShape();
+            mStickmanFX.mLeftForeLegFX.calculate(0);
+            mStickmanFX.mLeftForeLegFX.createShape();
+
+            mStickmanFX.mRightUpperLegFX.calculate(0);
+            mStickmanFX.mRightUpperLegFX.createShape();
+
+            mStickmanFX.mRightForeLegFX.calculate(0);
+            mStickmanFX.mRightForeLegFX.createShape();
+
+            mStickmanFX.mLeftFootFX.calculate(0);
+            mStickmanFX.mLeftFootFX.createShape();
+
+            mStickmanFX.mRightFootFX.calculate(0);
+            mStickmanFX.mRightFootFX.createShape();
+            mStickmanFX.update();
         });
 
     }
 }
-

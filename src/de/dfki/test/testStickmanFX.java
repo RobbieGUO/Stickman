@@ -13,14 +13,16 @@ import javafx.util.Duration;
  */
 public class testStickmanFX {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         StageRoom stickmanStage = new StageRoomFX(0, 0, true);
         stickmanStage.addStickman("Patrick");
         stickmanStage.addStickman("Anna");
-//        stickmanStage.launchConfiguration();
-         stickmanStage.launchStickmanStage(true);
-//         stickmanStage.getStickman("Patrick").doAnimation("LookLeft", 1000,true);
+        stickmanStage.launchConfiguration();
+//         stickmanStage.launchStickmanStage(true);
+         
+//         Thread.sleep(7000);
+//         stickmanStage.getStickman("Patrick").doAnimation("MoveLR",1000,true);
 //        stickmanStage.launchStickmanStage(true);
 //        stickmanStage.getStickman("Patrick").doAnimation("Blink", 4000,true);
 //        stickmanStage.getStickman("Patrick").doAnimation("LookLeft", 1000,true);

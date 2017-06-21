@@ -107,14 +107,9 @@ public class FaceLeft extends AnimationFX{
             mStickmanFX.update();
         });
         
-        
+        Platform.runLater(() -> {
         //////// FaceLeft
         mAnimationPartFX = new ArrayList<>();
-        
-//        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftShoulderFX, "rotate", rotationUnit*6-3));
-//        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftUpperArmFX, "rotate", rotationUnit +5));
-//        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftForeArmFX, "rotate", -rotationUnit*3 ));
-//        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftHandFX, "rotate", -rotationUnit*7));
 
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftShoulderFX, "shape", "LEFT"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftUpperArmFX, "shape", "LEFT"));
@@ -139,7 +134,7 @@ public class FaceLeft extends AnimationFX{
             mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMaleHairFX, "shape", "LEFT"));
         }
         playAnimationPart(50);
-        
+        });
         
         Platform.runLater(() -> {
         mStickmanFX.mOrientation = StickmanFX.ORIENTATION.RIGHT;
