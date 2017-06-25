@@ -29,6 +29,8 @@ public class FaceFront extends AnimationFX {
     @Override
     public void playAnimation() {
 
+        mStickmanFX.mMouthFX.setFaceflag("front");
+        
         int rotationUnit = 20;
         mAnimationPartFX = new ArrayList<>();
         

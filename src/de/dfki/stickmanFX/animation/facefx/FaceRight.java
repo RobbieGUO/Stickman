@@ -31,6 +31,7 @@ public class FaceRight extends AnimationFX {
 
         int rotationUnit = 20;
 
+        mStickmanFX.mMouthFX.setFaceflag("right");
         //////// FaceFront first
         mAnimationPartFX = new ArrayList<>();
 

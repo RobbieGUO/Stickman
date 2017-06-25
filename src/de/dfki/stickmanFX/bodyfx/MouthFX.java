@@ -31,6 +31,7 @@ public class MouthFX extends BodyPartFX {
     HeadFX mHeadFX;
     Path mPath;
     public MouthFX.SHAPE mShape = MouthFX.SHAPE.DEFAULT;
+    private String faceFlag = "front";
 
     public MouthFX(HeadFX head) {
         mHeadFX = head;
@@ -88,9 +89,16 @@ public class MouthFX extends BodyPartFX {
                         }
                     }
                 }
-
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1, mEnd.x, mEnd.y));
+                if (faceFlag.equals("left")) {
+                    mPath.getElements().add(new MoveTo(mStart.x + mLength + 25, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 1, mStart.x + mLength + 20, mStart.y));
+                } else if(faceFlag.equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 1, mStart.x - 40, mStart.y));
+                } else{
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1, mEnd.x, mEnd.y));
+                }
                 break;
 
             case SMILE:
@@ -316,64 +324,166 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo((mStart.x - mLength / 2 + mEnd.x + movement / 10 * 3) / 2, mStart.y + 1, mEnd.x + movement / 10 * 3, mEnd.y + movement / 20));
                 }
                 break;
+
             case O:
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2, mEnd.x, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2, mStart.x - mLength / 2, mStart.y));
+                if (faceFlag.equals("left")) {
+                    mPath.getElements().add(new MoveTo(mStart.x + mLength + 25, mStart.y - 2));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 25, mStart.y + 2));
+
+                } else if(faceFlag.equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y - 2));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 45, mStart.y + 2));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2, mEnd.x, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2, mStart.x - mLength / 2, mStart.y));
+                }
                 break;
 
             case ONE:
             case SIX:
             case FOURTEEN:
             case NINETEEN:
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 5, mEnd.x, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 5, mStart.x - mLength / 2, mStart.y));
+                if (faceFlag.equals("left")) {
+                    mPath.getElements().add(new MoveTo(mStart.x + mLength + 25, mStart.y - 1));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 1, mStart.x + mLength + 20, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 1, mStart.x + mLength + 25, mStart.y + 1));
+
+                } else if(faceFlag.equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y - 1));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 1, mStart.x - 40, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 1, mStart.x - 40, mStart.y + 1));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 5, mEnd.x, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 5, mStart.x - mLength / 2, mStart.y));
+                }
                 break;
 
             case TWO:
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2.8, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 1.6, mEnd.x - mLength / 6, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 1.6, mStart.x - mLength / 2.8, mStart.y));
+                if (faceFlag.equals("left")) {
+                    mPath.getElements().add(new MoveTo(mStart.x + mLength + 27, mStart.y - 4));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 23, mStart.y + 4));
+
+                } else if(faceFlag.equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - 47, mStart.y - 4));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 43, mStart.y + 4));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2.8, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2.8, mEnd.x - mLength / 6, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2, mStart.x - mLength / 2.8, mStart.y));
+
+                }
                 break;
 
             case THREE:
             case TWENTY:
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2.8, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2.5, mEnd.x - mLength / 6, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2.5, mStart.x - mLength / 2.8, mStart.y));
+                if (faceFlag.equals("left")) {
+                    mPath.getElements().add(new MoveTo(mStart.x + mLength + 26, mStart.y - 3));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 24, mStart.y + 3));
+
+                } else if(faceFlag.equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - 46, mStart.y - 3));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 44, mStart.y + 3));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2.8, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2.5, mEnd.x - mLength / 6, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2.5, mStart.x - mLength / 2.8, mStart.y));
+                }
                 break;
 
             case FOUR:
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - 3, mEnd.x, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2, mStart.x - mLength / 2, mStart.y));
+                if (faceFlag.equals("left")) {
+                    mPath.getElements().add(new MoveTo(mStart.x + mLength + 25, mStart.y - 2));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 25, mStart.y + 2));
+
+                } else if(faceFlag.equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y - 2));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 45, mStart.y + 2));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - 3, mEnd.x, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2, mStart.x - mLength / 2, mStart.y));
+                }
                 break;
 
             case FIVE:
             case EIGHT:
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2.8, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2, mEnd.x - mLength / 6, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2, mStart.x - mLength / 2.8, mStart.y));
+                if (faceFlag.equals("left")) {
+                    mPath.getElements().add(new MoveTo(mStart.x + mLength + 27, mStart.y - 4));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 23, mStart.y + 4));
+
+                } else if(faceFlag.equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - 47, mStart.y - 4));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 43, mStart.y + 4));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2.8, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2, mEnd.x - mLength / 6, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2, mStart.x - mLength / 2.8, mStart.y));
+                }
                 break;
 
             case SEVEN:
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 3, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - 3, mEnd.x - mLength / 5, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 3, mStart.x - mLength / 3, mStart.y));
+                if (faceFlag.equals("left")) {
+                    mPath.getElements().add(new MoveTo(mStart.x + mLength + 25, mStart.y - 1));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 1, mStart.x + mLength + 20, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 1, mStart.x + mLength + 25, mStart.y + 1));
+
+                } else if(faceFlag.equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y - 1));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 1, mStart.x - 40, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 1, mStart.x - 40, mStart.y + 1));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 3, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - 3, mEnd.x - mLength / 5, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 3, mStart.x - mLength / 3, mStart.y));
+                }
                 break;
 
             case NINE:
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 3, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2.8, mEnd.x - mLength / 5, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 1.6, mStart.x - mLength / 3, mStart.y));
+                if (faceFlag.equals("left")) {
+                    mPath.getElements().add(new MoveTo(mStart.x + mLength + 26, mStart.y - 3));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 24, mStart.y + 3));
+
+                } else if(faceFlag.equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - 46, mStart.y - 3));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 44, mStart.y + 3));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 3, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2.8, mEnd.x - mLength / 5, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 1.6, mStart.x - mLength / 3, mStart.y));
+                }
                 break;
 
             case TEN:
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2.8, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2.8, mEnd.x - mLength / 6, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2, mStart.x - mLength / 2.8, mStart.y));
+                if (faceFlag.equals("left")) {
+                    mPath.getElements().add(new MoveTo(mStart.x + mLength + 27, mStart.y - 4));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 23, mStart.y + 4));
+
+                } else if(faceFlag.equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - 47, mStart.y - 4));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 43, mStart.y + 4));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2.8, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - mLength / 2.8, mEnd.x - mLength / 6, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + mLength / 2, mStart.x - mLength / 2.8, mStart.y));
+                }
                 break;
+
             case TURNRIGHT:
                 if (mHeadFX.mStickmanFX.setCharacterInvisible == true) {
                     if (mHeadFX.mStickmanFX.fadeControler == true) // Added by Robbie
@@ -395,10 +505,10 @@ public class MouthFX extends BodyPartFX {
                 }
 
                 mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y));
-                mPath.getElements().add(new QuadCurveTo(mStart.x- 43, mStart.y + 1, mStart.x - 40, mStart.y));
+                mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 1, mStart.x - 40, mStart.y));
                 break;
-                
-                case TURNLEFT:
+
+            case TURNLEFT:
                 if (mHeadFX.mStickmanFX.setCharacterInvisible == true) {
                     if (mHeadFX.mStickmanFX.fadeControler == true) // Added by Robbie
                     {
@@ -432,5 +542,9 @@ public class MouthFX extends BodyPartFX {
         if (mHeadFX.mStickmanFX.setCharacterInvisible == false) {
             mColorRecorder = mColor;
         }
+    }
+
+    public void setFaceflag(String s) {
+        faceFlag = s;
     }
 }

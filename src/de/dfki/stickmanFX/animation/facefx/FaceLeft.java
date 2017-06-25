@@ -28,6 +28,7 @@ public class FaceLeft extends AnimationFX{
     @Override
     public void playAnimation() {
         
+        mStickmanFX.mMouthFX.setFaceflag("left");
         int rotationUnit = 20;
         
         
