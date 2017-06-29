@@ -5,6 +5,8 @@ import de.dfki.common.commonFX3D.ApplicationLauncherImpl;
 import de.dfki.common.StickmansOnStage;
 import de.dfki.common.interfaces.StickmanStage;
 import de.dfki.stickmanFX.StickmanFX;
+import de.dfki.stickmanFX.StickmanStageController;
+import de.dfki.stickmanFX.UdpServer;
 import de.dfki.welcome.WelcomeController;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -22,6 +24,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -64,6 +71,8 @@ public class StickmanStageFX extends Application implements StickmanStage {
     private static Boolean billyHouse = true;
 
     public static Boolean bullyingStageControl = true;
+
+    private UdpServer mUdpServer;
 
     public StickmanStageFX() { // This cannot be private because of
         // ApplicationFX
@@ -147,6 +156,41 @@ public class StickmanStageFX extends Application implements StickmanStage {
             if (!decoration) {
                 stage.initStyle(StageStyle.UNDECORATED);
             }
+            stage.setOnCloseRequest(event -> {
+                try {
+                    System.out.println("Stage is closing");
+                    // Save file
+                    UdpServer.mDone = true;
+                    StickmanStageController.UdpCheck = false;
+//                if((generalConfigStageRoot.getmStickmanStageController().mUdpServer) != null){
+//                generalConfigStageRoot.getmStickmanStageController().mUdpServer.abort();
+//                }
+                    try {
+                        DatagramSocket clientSocket;
+                        clientSocket = new DatagramSocket();
+                        InetAddress IPAddress;
+                        IPAddress = InetAddress.getByName("localhost");
+                        byte[] sendData = new byte[1024];
+                        byte[] receiveData = new byte[1024];
+                        String s = "Closed";
+                        sendData = s.getBytes();
+                        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9777);
+                        try {
+                            clientSocket.send(sendPacket);
+                            System.out.println(s + ":  IS SENDED");
+                            clientSocket.close();
+                        } catch (IOException ex) {
+                            Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } catch (SocketException ex) {
+                    Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+
             stickmanFXStages.put(uuid, stage);
 
             /// added by R
@@ -158,26 +202,26 @@ public class StickmanStageFX extends Application implements StickmanStage {
                     if (e.getButton().equals(MouseButton.SECONDARY)) {
                         setBillyHouseFlag(Boolean.FALSE);
 //                        if (bullyingStageControl && bullyingVSMControlDoorBell) {
-                            bullyingVSMControl = false;
-                            bullyingStageControl = false;
+                        bullyingVSMControl = false;
+                        bullyingStageControl = false;
 
-                            FXMLLoader loader = new FXMLLoader();
-                            loader.setLocation(getClass().getResource("/de/dfki/bullying/BullyingHelp.fxml"));
-                            try {
-                                AnchorPane bullyingroot = (AnchorPane) loader.load();
-                                Stage bullyingstage = new Stage();
-                                bullyingstage.setTitle("BullyingHelp");
-                                bullyingstage.initOwner(stage);
-                                Scene bullyingscene = new Scene(bullyingroot);
-                                bullyingstage.setScene(bullyingscene);
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("/de/dfki/bullying/BullyingHelp.fxml"));
+                        try {
+                            AnchorPane bullyingroot = (AnchorPane) loader.load();
+                            Stage bullyingstage = new Stage();
+                            bullyingstage.setTitle("BullyingHelp");
+                            bullyingstage.initOwner(stage);
+                            Scene bullyingscene = new Scene(bullyingroot);
+                            bullyingstage.setScene(bullyingscene);
 
-                                BullyingHelpController controller = loader.getController();
-                                controller.setDialogStage(bullyingstage, sInstance);
+                            BullyingHelpController controller = loader.getController();
+                            controller.setDialogStage(bullyingstage, sInstance);
 
-                                bullyingstage.showAndWait();
-                            } catch (IOException ex) {
-                                Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                            bullyingstage.showAndWait();
+                        } catch (IOException ex) {
+                            Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 //                        }
                     } else if (e.getButton().equals(MouseButton.PRIMARY)) {
                         bullyingVSMControlDoorBell = true;
@@ -205,6 +249,14 @@ public class StickmanStageFX extends Application implements StickmanStage {
                 Logger.getLogger(StickmanStageFX.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+
+//        Platform.runLater(() -> {
+//            try {
+//                mUdpServer = new UdpServer(generalConfigStageRoot.getmStickmanStageController());
+//            } catch (SocketException ex) {
+//            }
+//            mUdpServer.start();
+//        });
     }
 
     public static void setBillyHouseFlag(Boolean b) {
@@ -230,7 +282,7 @@ public class StickmanStageFX extends Application implements StickmanStage {
     public static Boolean bullyingVSMControlDoorBell() {
         return bullyingVSMControlDoorBell;
     }
-    
+
     public static void setbullyingVSMControlDoorBell(Boolean b) {
         bullyingVSMControlDoorBell = b;
     }
