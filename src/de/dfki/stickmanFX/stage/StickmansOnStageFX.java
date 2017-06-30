@@ -16,7 +16,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class StickmansOnStageFX extends StickmansOnStage {
 
-    private static String StickmanName = null;
+    private static String StickmanName = "unknown";
     
     public StickmansOnStageFX(StickmanStage stickmanStage) {
         super(stickmanStage);

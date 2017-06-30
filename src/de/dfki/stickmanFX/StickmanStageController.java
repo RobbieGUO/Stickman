@@ -63,7 +63,11 @@ public class StickmanStageController implements ViewController {
     public static boolean UdpCheck = false;
     private static int i = 0;
     private static boolean NextDialog = false;
+    private static boolean Dialog1 = false;
+    private static boolean Dialog2 = false;
+    private static boolean Dialog3 = false;
     private static boolean fix = false;
+    private static boolean sayNothingFlag = false;
     // private final static ObservableList<String> backgroundList =
     // FXCollections.observableArrayList("office",
     // "grassland");
@@ -177,6 +181,15 @@ public class StickmanStageController implements ViewController {
     private Button MessageButton;
 
     @FXML
+    private Button dialog1Button;
+    @FXML
+    private Button dialog2Button;
+    @FXML
+    private Button dialog3Button;
+    @FXML
+    private Button sayNothingButton;
+
+    @FXML
     private Button NextDialogButton;
 
     @FXML
@@ -192,7 +205,6 @@ public class StickmanStageController implements ViewController {
     @FXML
     public void initialize() {
 
-        System.out.println("Start controller...................................");
         System.out.println("Start controller..................................." + i);
         UdpServer.mDone = false;
         InformationTextArea.setText("Welcome to Bullying Social Training");
@@ -210,20 +222,23 @@ public class StickmanStageController implements ViewController {
                 }
                 i = 0;
             }
-        } else {
-            if (i == 3) {
-                if (!UdpCheck) {
-                    try {
-                        mUdpServer = new UdpServer(this);
-                    } catch (SocketException ex) {
-                    }
-                    UdpCheck = true;
-                    mUdpServer.start();
-                    fix = true;
+        } else if (i == 3) {
+            if (!UdpCheck) {
+                try {
+                    mUdpServer = new UdpServer(this);
+                } catch (SocketException ex) {
                 }
-                i = 0;
+                UdpCheck = true;
+                mUdpServer.start();
+                fix = true;
             }
+            i = 0;
         }
+
+//        dialog1Button.setVisible(false);
+//        dialog2Button.setVisible(false);
+//        dialog3Button.setVisible(false);
+        NextDialogButton.setVisible(false);
 
         initColorSlider();
         setIdForLabel();
@@ -579,6 +594,54 @@ public class StickmanStageController implements ViewController {
             @Override
             public void handle(ActionEvent event) {
                 NextDialog = true;
+                Dialog2 = false;
+                Dialog1 = false;
+                Dialog3 = false;
+                sayNothingFlag = false;
+            }
+        });
+
+        dialog1Button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                NextDialog = true;
+                Dialog1 = true;
+                Dialog2 = false;
+                Dialog3 = false;
+                sayNothingFlag = false;
+            }
+        });
+
+        dialog2Button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                NextDialog = true;
+                Dialog2 = true;
+                Dialog1 = false;
+                Dialog3 = false;
+                sayNothingFlag = false;
+            }
+        });
+
+        dialog3Button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                NextDialog = true;
+                Dialog3 = true;
+                Dialog2 = false;
+                Dialog1 = false;
+                sayNothingFlag = false;
+            }
+        });
+
+        sayNothingButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                NextDialog = true;
+                Dialog1 = false;
+                Dialog2 = false;
+                Dialog3 = false;
+                sayNothingFlag = true;
             }
         });
 
@@ -1010,12 +1073,32 @@ public class StickmanStageController implements ViewController {
         InformationTextArea.setText(s);
     }
 
+    public static void changeAllFlagFalse() {
+        Dialog1 = false;
+        Dialog2 = false;
+        Dialog3 = false;
+        NextDialog = false;
+        sayNothingFlag = false;
+    }
+
+    public static boolean readDialog1() {
+        return Dialog1;
+    }
+
+    public static boolean readDialog2() {
+        return Dialog2;
+    }
+
+    public static boolean readDialog3() {
+        return Dialog3;
+    }
+
     public static boolean readNextDialog() {
         return NextDialog;
     }
 
-    public static void changeNextDialog(boolean b) {
-        NextDialog = b;
+    public static boolean readsayNothingFlag() {
+        return sayNothingFlag;
     }
 
 }

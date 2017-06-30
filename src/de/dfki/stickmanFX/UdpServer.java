@@ -54,6 +54,7 @@ public class UdpServer extends Thread {
                 wairingUpdMessage();
                 if (feedback != null) {
                     feedback = feedback.trim();
+                    feedback = feedback.replace("\\n", "\n");
                     // Handle the message
                     controler.modifyBullyTextArea(feedback);
                     System.out.println(feedback + ": Changed!");
