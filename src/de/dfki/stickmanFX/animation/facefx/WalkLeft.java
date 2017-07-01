@@ -36,6 +36,7 @@ public class WalkLeft extends AnimationFX {
     public void playAnimation() {
 
         int rotationUnit = 20;
+        mStickmanFX.mMouthFX.setFaceflag("left");
 
         //////// FaceFront first
         mAnimationPartFX = new ArrayList<>();
@@ -164,7 +165,6 @@ public class WalkLeft extends AnimationFX {
         });
 
         String sParameter = (String) mParameter;
-        sParameter = "1000";
         sParameter = sParameter.trim();
 
         try {

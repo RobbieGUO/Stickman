@@ -36,6 +36,7 @@ public class WalkRight extends AnimationFX {
     public void playAnimation() {
 
         int rotationUnit = 20;
+        mStickmanFX.mMouthFX.setFaceflag("right");
 
         //////// FaceFront first
         mAnimationPartFX = new ArrayList<>();
@@ -161,7 +162,6 @@ public class WalkRight extends AnimationFX {
         });
 
         String sParameter = (String) mParameter;
-        sParameter = "0";
         sParameter = sParameter.trim();
 
         try {
@@ -170,7 +170,7 @@ public class WalkRight extends AnimationFX {
             System.out.println("NumberFormatException: " + nfe.getMessage());
         }
 
-        //move down slowly
+        //move right slowly
         double speedUnit = (hdistance - mStickmanFX.hoffset) / 8;
         int j = 0;
         if (speedUnit <= 0) {

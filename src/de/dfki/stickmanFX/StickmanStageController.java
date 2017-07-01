@@ -673,7 +673,7 @@ public class StickmanStageController implements ViewController {
             }
         });
 
-//	saveToXml();
+	saveToXml();
 //	handlePerlinNoise();
     }
 
