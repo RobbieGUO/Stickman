@@ -91,8 +91,13 @@ public class RightEyebrowFX extends BodyPartFX {
             case ANGRY:
                 movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
 
-                mPath.getElements().add(new MoveTo(mStart.x + movement / 4, mStart.y + movement / 4));
-                mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 4 + mEnd.x + movement / 3) / 2, mStart.y + movement / 4 - 3, mEnd.x + movement / 4, mEnd.y));
+                if (mHeadFX.mStickmanFX.mMouthFX.getFaceflag().equals("right")) {
+                    mPath.getElements().add(new MoveTo(mStart.x - movement / 4, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo((mStart.x - movement / 4 + mEnd.x - movement / 3) / 2, mStart.y+ 2, mEnd.x - movement / 4, mEnd.y+ movement / 4));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x + movement / 4, mStart.y + movement / 4));
+                    mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 4 + mEnd.x + movement / 3) / 2, mStart.y + movement / 4 - 3, mEnd.x + movement / 4, mEnd.y));
+                }
                 break;
 
             case ANGRYEND:

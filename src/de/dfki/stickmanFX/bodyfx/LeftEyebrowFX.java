@@ -23,9 +23,9 @@ import javafx.scene.shape.QuadCurveTo;
 public class LeftEyebrowFX extends BodyPartFX {
 
     public static enum SHAPE {
-        DEFAULT, ANGRY, ANGRYEND, DISGUSTED, DISGUSTEDEND, SURPRISED, 
+        DEFAULT, ANGRY, ANGRYEND, DISGUSTED, DISGUSTEDEND, SURPRISED,
         SURPRISEDEND, EXCITED, EXCITEDEND, EMBARRASSED, EMBARRASSEDEND,
-        TURNRIGHT,TURNLEFT
+        TURNRIGHT, TURNLEFT
     };
 
     HeadFX mHeadFX;
@@ -94,11 +94,19 @@ public class LeftEyebrowFX extends BodyPartFX {
                 break;
 
             case ANGRY:
+
                 movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
 
-                mPath.getElements().add(new MoveTo(mStart.x - movement / 4, mStart.y + movement / 4));
-                mPath.getElements().add(new QuadCurveTo((mStart.x - movement / 4 + mEnd.x - movement / 3) / 2, mStart.y + movement / 4 - 3, mEnd.x - movement / 4, mEnd.y));
+                if (mHeadFX.mStickmanFX.mMouthFX.getFaceflag().equals("left")) {
+//                mPath.getElements().add(new MoveTo(mStart.x - movement / 4, mStart.y + movement / 4));
+//                mPath.getElements().add(new QuadCurveTo((mStart.x - movement / 4 + mEnd.x - movement / 3) / 2, mStart.y + movement / 4 - 3, mEnd.x - movement / 4, mEnd.y));
 
+                    mPath.getElements().add(new MoveTo(mStart.x + movement / 4, mStart.y));
+                    mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 4 + mEnd.x + movement / 3) / 2, mStart.y + 2, mEnd.x + movement / 4, mEnd.y + movement / 4));
+                } else {
+                    mPath.getElements().add(new MoveTo(mStart.x - movement / 4, mStart.y + movement / 4));
+                    mPath.getElements().add(new QuadCurveTo((mStart.x - movement / 4 + mEnd.x - movement / 3) / 2, mStart.y + movement / 4 - 3, mEnd.x - movement / 4, mEnd.y));
+                }
                 break;
 
             case ANGRYEND:
@@ -180,11 +188,11 @@ public class LeftEyebrowFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 2 + mEnd.x + movement / 2) / 2, mStart.y - 3 + movement / 5 * 4, mEnd.x + movement / 2, mEnd.y + movement / 2));
                 }
                 break;
-                
-                case TURNRIGHT:
+
+            case TURNRIGHT:
                 break;
-                
-                case TURNLEFT:
+
+            case TURNLEFT:
                 break;
         }
         this.getChildren().add(mPath);

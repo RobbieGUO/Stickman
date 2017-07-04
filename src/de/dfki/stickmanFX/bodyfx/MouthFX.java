@@ -547,4 +547,8 @@ public class MouthFX extends BodyPartFX {
     public void setFaceflag(String s) {
         faceFlag = s;
     }
+    
+    public String getFaceflag() {
+        return faceFlag;
+    }
 }
