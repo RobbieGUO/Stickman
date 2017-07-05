@@ -29,7 +29,7 @@ public class RightEyeFX extends BodyPartFX {
         SURPRISED, SURPRISEDEND, HAPPY, HAPPYEND, DISGUSTED, 
         DISGUSTEDEND, LOVED, LOVEDEND, LOVED1, CONTEMPT, CONTEMPTEND, 
         EXCITED, EXCITEDEND, EMBARRASSED, EMBARRASSEDEND, TURNRIGHT,
-        TURNLEFT
+        TURNLEFT, SAD
     };
 
     HeadFX mHead;
@@ -143,6 +143,17 @@ public class RightEyeFX extends BodyPartFX {
                 mPath.getElements().add(new MoveTo(mStart.x + movement / 10, mStart.y));
                 mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 10 + mEnd.x + movement / 8) / 2, mStart.y - movement / 6, mEnd.x + movement / 8, mEnd.y));
                 mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 10 + mEnd.x + movement / 8) / 2, mStart.y + movement / 6, mStart.x + movement / 10, mStart.y));
+                break;
+            
+            case SAD:
+                movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
+
+                mPath.getElements().clear();
+                mPath.getElements().add(new MoveTo(mStart.x + movement / 10, mStart.y));
+//                mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 10 + mEnd.x + movement / 8) / 2, mStart.y - movement / 6, mEnd.x + movement / 8, mEnd.y));
+//                mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 10 + mEnd.x + movement / 8) / 2, mStart.y + movement / 6, mStart.x + movement / 10, mStart.y));
+                                mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 10 + mEnd.x + movement / 8) / 2, mStart.y + movement / 6, mEnd.x + movement / 8, mEnd.y));
+
                 break;
 
             case ANGRYEND:

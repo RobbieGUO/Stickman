@@ -92,10 +92,10 @@ public class MouthFX extends BodyPartFX {
                 if (faceFlag.equals("left")) {
                     mPath.getElements().add(new MoveTo(mStart.x + mLength + 25, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 1, mStart.x + mLength + 20, mStart.y));
-                } else if(faceFlag.equals("right")) {
+                } else if (faceFlag.equals("right")) {
                     mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 1, mStart.x - 40, mStart.y));
-                } else{
+                } else {
                     mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1, mEnd.x, mEnd.y));
                 }
@@ -123,8 +123,14 @@ public class MouthFX extends BodyPartFX {
             case SAD:
                 movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
 
-                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - movement / 2, mStart.y + movement / 4));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - movement, mEnd.x + movement / 2, mEnd.y + movement / 4));
+//                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - movement / 2, mStart.y + movement / 4));
+//                1 SAD
+//                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - movement, mEnd.x + movement / 2, mEnd.y + movement / 4));
+                // LIGHT SAD 1
+//                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - movement/4, mEnd.x + movement / 2, mEnd.y + movement / 4));
+                // LIGHT SAD 2
+                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
+                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - 2, mEnd.x, mEnd.y));
                 break;
 
             case SADEND:
@@ -331,7 +337,7 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 25, mStart.y + 2));
 
-                } else if(faceFlag.equals("right")) {
+                } else if (faceFlag.equals("right")) {
                     mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y - 2));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 45, mStart.y + 2));
@@ -351,7 +357,7 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 1, mStart.x + mLength + 20, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 1, mStart.x + mLength + 25, mStart.y + 1));
 
-                } else if(faceFlag.equals("right")) {
+                } else if (faceFlag.equals("right")) {
                     mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y - 1));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 1, mStart.x - 40, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 1, mStart.x - 40, mStart.y + 1));
@@ -368,7 +374,7 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 23, mStart.y + 4));
 
-                } else if(faceFlag.equals("right")) {
+                } else if (faceFlag.equals("right")) {
                     mPath.getElements().add(new MoveTo(mStart.x - 47, mStart.y - 4));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 43, mStart.y + 4));
@@ -387,7 +393,7 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 24, mStart.y + 3));
 
-                } else if(faceFlag.equals("right")) {
+                } else if (faceFlag.equals("right")) {
                     mPath.getElements().add(new MoveTo(mStart.x - 46, mStart.y - 3));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 44, mStart.y + 3));
@@ -404,7 +410,7 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 25, mStart.y + 2));
 
-                } else if(faceFlag.equals("right")) {
+                } else if (faceFlag.equals("right")) {
                     mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y - 2));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 45, mStart.y + 2));
@@ -422,7 +428,7 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 23, mStart.y + 4));
 
-                } else if(faceFlag.equals("right")) {
+                } else if (faceFlag.equals("right")) {
                     mPath.getElements().add(new MoveTo(mStart.x - 47, mStart.y - 4));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 43, mStart.y + 4));
@@ -439,7 +445,7 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 1, mStart.x + mLength + 20, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 1, mStart.x + mLength + 25, mStart.y + 1));
 
-                } else if(faceFlag.equals("right")) {
+                } else if (faceFlag.equals("right")) {
                     mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y - 1));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 1, mStart.x - 40, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 1, mStart.x - 40, mStart.y + 1));
@@ -456,7 +462,7 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 24, mStart.y + 3));
 
-                } else if(faceFlag.equals("right")) {
+                } else if (faceFlag.equals("right")) {
                     mPath.getElements().add(new MoveTo(mStart.x - 46, mStart.y - 3));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 44, mStart.y + 3));
@@ -473,7 +479,7 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y - 2, mStart.x + mLength + 20, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x + mLength + 22, mStart.y + 2, mStart.x + mLength + 23, mStart.y + 4));
 
-                } else if(faceFlag.equals("right")) {
+                } else if (faceFlag.equals("right")) {
                     mPath.getElements().add(new MoveTo(mStart.x - 47, mStart.y - 4));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y - 2, mStart.x - 40, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 2, mStart.x - 43, mStart.y + 4));
@@ -547,7 +553,7 @@ public class MouthFX extends BodyPartFX {
     public void setFaceflag(String s) {
         faceFlag = s;
     }
-    
+
     public String getFaceflag() {
         return faceFlag;
     }

@@ -30,7 +30,7 @@ public class LeftEyeFX extends BodyPartFX {
     public static enum SHAPE {
         DEFAULT, BLINK, LOOKLEFT, LOOKRIGHT, ANGRY, ANGRYEND, SURPRISED, SURPRISEDEND, HAPPY, 
         HAPPYEND, DISGUSTED, DISGUSTEDEND, LOVED, LOVEDEND, LOVED1, CONTEMPT, CONTEMPTEND, 
-        EXCITED, EXCITEDEND, EMBARRASSED, EMBARRASSEDEND, TURNRIGHT, TURNLEFT
+        EXCITED, EXCITEDEND, EMBARRASSED, EMBARRASSEDEND, TURNRIGHT, TURNLEFT,SAD
     };
 
     HeadFX mHeadFX;
@@ -142,6 +142,16 @@ public class LeftEyeFX extends BodyPartFX {
                 mPath.getElements().add(new MoveTo(mStart.x - movement / 10, mStart.y));
                 mPath.getElements().add(new QuadCurveTo((mStart.x - movement / 10 + mEnd.x - movement / 8) / 2, mStart.y - movement / 6, mEnd.x - movement / 8, mEnd.y));
                 mPath.getElements().add(new QuadCurveTo((mStart.x - movement / 10 + mEnd.x - movement / 8) / 2, mStart.y + movement / 6, mStart.x - movement / 10, mStart.y));
+
+                break;
+                
+            case SAD:
+                movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
+
+                mPath.getElements().add(new MoveTo(mStart.x - movement / 10, mStart.y));
+//                mPath.getElements().add(new QuadCurveTo((mStart.x - movement / 10 + mEnd.x - movement / 8) / 2, mStart.y - movement / 6, mEnd.x - movement / 8, mEnd.y));
+//                mPath.getElements().add(new QuadCurveTo((mStart.x - movement / 10 + mEnd.x - movement / 8) / 2, mStart.y + movement / 6, mStart.x - movement / 10, mStart.y));
+                mPath.getElements().add(new QuadCurveTo((mStart.x - movement / 10 + mEnd.x - movement / 8) / 2, mStart.y + movement / 6, mEnd.x - movement / 8, mEnd.y));
 
                 break;
 
