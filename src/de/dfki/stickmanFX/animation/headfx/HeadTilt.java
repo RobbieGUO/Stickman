@@ -25,7 +25,7 @@ public class HeadTilt extends AnimationFX {
 
     @Override
     public void playAnimation() {
-        int translationUnit = 8;
+        int translationUnit = 5;
 
         // head down
         mAnimationPartFX = new ArrayList<>();
@@ -44,7 +44,7 @@ public class HeadTilt extends AnimationFX {
 
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMouthFX, "tilt", translationUnit));
 
-        playAnimationPart(150);
+        playAnimationPart(200);
 
         pauseAnimation(200);
 

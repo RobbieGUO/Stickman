@@ -674,7 +674,7 @@ public class StickmanStageController implements ViewController {
         });
 
 	saveToXml();
-//	handlePerlinNoise();
+	handlePerlinNoise();
     }
 
     private void initColorSlider() {

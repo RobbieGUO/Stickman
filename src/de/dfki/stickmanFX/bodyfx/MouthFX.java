@@ -20,7 +20,7 @@ import javafx.scene.shape.QuadCurveTo;
 public class MouthFX extends BodyPartFX {
 
     public static enum SHAPE {
-        DEFAULT, SMILE, SMILEEND, SAD, SADEND, ANGRY, ANGRYEND,
+        DEFAULT, SMILE, SMILEEND, SAD, SADEND, SADLIGHT,ANGRY, ANGRYEND,
         ANGRYSMALLMOUTH, ANGRYSMALLMOUTHEND, SURPRISED, SURPRISEDEND,
         HAPPY, HAPPYEND, DISGUSTED, DISGUSTEDEND, CONTEMPT, CONTEMPTEND,
         EXCITED, EXCITEDEND, EMBARRASSED, EMBARRASSEDEND, FEAR, FEAREND, O,
@@ -96,8 +96,8 @@ public class MouthFX extends BodyPartFX {
                     mPath.getElements().add(new MoveTo(mStart.x - 45, mStart.y));
                     mPath.getElements().add(new QuadCurveTo(mStart.x - 43, mStart.y + 1, mStart.x - 40, mStart.y));
                 } else {
-                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
-                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1, mEnd.x, mEnd.y));
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - 5, mStart.y - 2));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 5, mEnd.x + 5, mEnd.y - 2));
                 }
                 break;
 
@@ -111,8 +111,10 @@ public class MouthFX extends BodyPartFX {
             case SMILEEND:
                 movement = mShapeAnimationStep - 1;
                 if (movement <= 1) {
-                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
-                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1, mEnd.x, mEnd.y));
+//                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
+//                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1, mEnd.x, mEnd.y));
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - 5, mStart.y - 2));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 5, mEnd.x + 5, mEnd.y - 2));
                 } else {
                     mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - movement / 3 * 2, mStart.y - movement / 2));
                     mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1 + movement / 3 * 2,
@@ -120,7 +122,7 @@ public class MouthFX extends BodyPartFX {
                 }
                 break;
 
-            case SAD:
+            case SADLIGHT:
                 movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
 
 //                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - movement / 2, mStart.y + movement / 4));
@@ -131,6 +133,13 @@ public class MouthFX extends BodyPartFX {
                 // LIGHT SAD 2
                 mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
                 mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - 2, mEnd.x, mEnd.y));
+                break;
+                
+             case SAD:
+                movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
+
+                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - movement / 2, mStart.y + movement / 4));
+                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - movement/4, mEnd.x + movement / 2, mEnd.y + movement / 4));
                 break;
 
             case SADEND:
@@ -149,7 +158,6 @@ public class MouthFX extends BodyPartFX {
 
                 mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - movement / 4, mStart.y + movement / 10));
                 mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1 - movement / 3 * 2, mEnd.x + movement / 4, mStart.y + movement / 10));
-
                 break;
 
             case ANGRYEND:
@@ -219,8 +227,10 @@ public class MouthFX extends BodyPartFX {
             case HAPPYEND:
                 movement = mShapeAnimationStep - 1;
                 if (movement <= 1) {
-                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
-                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1, mEnd.x, mEnd.y));
+//                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
+//                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1, mEnd.x, mEnd.y));
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - 5, mStart.y - 2));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 5, mEnd.x + 5, mEnd.y - 2));
                 } else {
                     mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - movement / 2, mStart.y - movement / 4));
                     mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1 + movement, mEnd.x + movement / 2, mStart.y - movement / 4));
@@ -303,8 +313,10 @@ public class MouthFX extends BodyPartFX {
                 movement = mShapeAnimationStep - 1;
 
                 if (movement <= 1) {
-                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
-                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1, mEnd.x, mEnd.y));
+//                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
+//                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 1, mEnd.x, mEnd.y));
+                    mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - 5, mStart.y - 2));
+                    mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 5, mEnd.x + 5, mEnd.y - 2));
                 } else {
                     mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - movement / 3 * 2, mStart.y - movement / 2));
                     mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + movement, mEnd.x + movement / 3 * 2, mStart.y - movement / 2));

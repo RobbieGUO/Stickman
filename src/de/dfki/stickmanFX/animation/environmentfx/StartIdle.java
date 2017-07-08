@@ -22,6 +22,7 @@ public class StartIdle extends AnimationFX {
 
     @Override
     public void playAnimation() {
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   Start!");
         if (!mStickmanFX.mIdleBehavior.isAlive()) {
             mStickmanFX.mIdleRun = true;
             mStickmanFX.mIdleBehavior = new IdleBehavior(mStickmanFX, mStickmanFX.simplexNoise);

@@ -15,18 +15,30 @@ import java.util.ArrayList;
  * @author Beka
  *
  */
-public class SadEnd extends AnimationFX {
+public class SadLight extends AnimationFX {
 
-    public SadEnd() {
-        super();
+    public SadLight() {
+        mAnimType = AnimationFX.ANIMTYPE.EmotionExpression;
     }
 
-    public SadEnd(StickmanFX sm, int duration, boolean block) {
+    public SadLight(StickmanFX sm, int duration, boolean block) {
         super(sm, duration, block);
     }
 
     @Override
     public void playAnimation() {
+        // sad
+        mAnimationPartFX = new ArrayList<>();
+        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMouthFX, "shape", "SADLIGHT"));
+        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyebrowFX, "shape", "DISGUSTED"));  // add by Robbie
+        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightEyebrowFX, "shape", "DISGUSTED")); // add by Robbie
+        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyeFX, "shape", "SAD"));  // add by Robbie
+        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightEyeFX, "shape", "SAD")); // add by Robbie
+
+        playAnimationPart(mDuration);
+
+        pauseAnimation(1200);
+
         // no sad
         mAnimationPartFX = new ArrayList<>();
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMouthFX, "shape", "SADEND"));
@@ -34,8 +46,7 @@ public class SadEnd extends AnimationFX {
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightEyebrowFX, "shape", "DISGUSTEDEND")); // add by Robbie
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyeFX, "shape", "DEFAULT"));  // add by Robbie
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightEyeFX, "shape", "DEFAULT")); // add by Robbie
-        playAnimationPart(mDuration);
 
-        pauseAnimation(10);
+        playAnimationPart(20);
     }
 }

@@ -19,7 +19,7 @@ public class RightEyebrowFX extends BodyPartFX {
     public static enum SHAPE {
         DEFAULT, ANGRY, ANGRYEND, DISGUSTED, DISGUSTEDEND,
         SURPRISED, SURPRISEDEND, EXCITED, EXCITEDEND, EMBARRASSED,
-        EMBARRASSEDEND, TURNRIGHT, TURNLEFT
+        EMBARRASSEDEND, TURNRIGHT, TURNLEFT, CONTEMPT
     };
 
     HeadFX mHeadFX;
@@ -98,6 +98,14 @@ public class RightEyebrowFX extends BodyPartFX {
                     mPath.getElements().add(new MoveTo(mStart.x + movement / 4, mStart.y + movement / 4));
                     mPath.getElements().add(new QuadCurveTo((mStart.x + movement / 4 + mEnd.x + movement / 3) / 2, mStart.y + movement / 4 - 3, mEnd.x + movement / 4, mEnd.y));
                 }
+                break;
+                
+            case CONTEMPT:
+                movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
+                
+                mPath.getElements().add(new MoveTo(mStart.x, mStart.y- movement/4));
+                mPath.getElements().add(new QuadCurveTo((mStart.x + mEnd.x) / 2, mStart.y - 3 - movement/4, mEnd.x, mEnd.y - movement/4));
+                
                 break;
 
             case ANGRYEND:

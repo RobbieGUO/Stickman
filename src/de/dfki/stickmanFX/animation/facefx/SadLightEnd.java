@@ -15,13 +15,13 @@ import java.util.ArrayList;
  * @author Beka
  *
  */
-public class SadEnd extends AnimationFX {
+public class SadLightEnd extends AnimationFX {
 
-    public SadEnd() {
+    public SadLightEnd() {
         super();
     }
 
-    public SadEnd(StickmanFX sm, int duration, boolean block) {
+    public SadLightEnd(StickmanFX sm, int duration, boolean block) {
         super(sm, duration, block);
     }
 

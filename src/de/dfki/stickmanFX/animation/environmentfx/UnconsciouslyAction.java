@@ -27,7 +27,7 @@ public class UnconsciouslyAction extends Thread {
     }
 
     private void coverMouth() {
-        if (NoiseNumber == 1) {
+        if (NoiseNumber == 3) {
             countCoverMouth++;
             if (countCoverMouth == 20) {
                 countCoverMouth = 0;
@@ -68,7 +68,7 @@ public class UnconsciouslyAction extends Thread {
     }
 
     private void blink() {
-        if (NoiseNumber == 3) {
+        if (NoiseNumber == 1) {
             countBlink++;
             if (countBlink == 8) {
                 countBlink = 0;
@@ -127,8 +127,9 @@ public class UnconsciouslyAction extends Thread {
                     mStickmanFX.mLogger.severe(ex.getMessage());
                 }
             } else {
-                coverMouth();
-                touchHead();
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   Start Start!");
+//                coverMouth();
+//                touchHead();
                 blink();
                 tileHead();
             }

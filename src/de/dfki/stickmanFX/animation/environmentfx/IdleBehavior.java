@@ -1,6 +1,8 @@
 package de.dfki.stickmanFX.animation.environmentfx;
 
 import de.dfki.stickmanFX.StickmanFX;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 
 /**
@@ -27,56 +29,62 @@ public class IdleBehavior extends Thread {
 
     @Override
     public void run() {
-        while (mStickmanFX.mIdleRun) {
-            // to generate index of perlin noise Array
-            count1++;
-            if (count1 == 200) {
-                count1 = 0;
-                count2++;
+//        while (mStickmanFX.mIdleRun) {
+//            // to generate index of perlin noise Array
+//            count1++;
+//            if (count1 == 200) {
+//                count1 = 0;
+//                count2++;
+//            }
+//            if (count2 == 200) {
+//                count2 = 1;
+//            }
+//
+//            mStickmanFX.mWobble = ((mSimplexNoise.getNoise(count2, count1) * 600)) / 20;
+////        System.out.printf("%.5f",mSimplexNoise.getNoise(count1,count2));
+////        System.out.println();
+//            double mAdjust = mStickmanFX.mWobble;
+//
+//            // 40 segments to achieve the wobble: come and back
+//            for (int i = 0; i < 19; i++) {
+//                mStickmanFX.mWobble = mStickmanFX.mWobble + mAdjust;
+//                Platform.runLater(()
+//                        -> {
+//                    mStickmanFX.update();
+//                }
+//                );
+//
+//                try {
+//                    sleep(mSleepTime, 0);
+//                } catch (InterruptedException ex) {
+//                    mStickmanFX.mLogger.severe(ex.getMessage());
+//                }
+//            }
+//
+//            for (int i = 0; i < 19; i++) {
+//                mStickmanFX.mWobble = mStickmanFX.mWobble - mAdjust;
+//                if (i == 18) {
+//                    mStickmanFX.mWobble = 0;
+//                }
+//                Platform.runLater(()
+//                        -> {
+//                    mStickmanFX.update();
+//                }
+//                );
+//
+//                try {
+//                    sleep(mSleepTime, 0);
+//                } catch (InterruptedException ex) {
+//                    mStickmanFX.mLogger.severe(ex.getMessage());
+//                }
+//            }
+//        }
+        while (mUnconsciouslyAction.isAlive()){
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(IdleBehavior.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (count2 == 200) {
-                count2 = 1;
-            }
-
-            mStickmanFX.mWobble = ((mSimplexNoise.getNoise(count2, count1) * 600)) / 20;
-//        System.out.printf("%.5f",mSimplexNoise.getNoise(count1,count2));
-//        System.out.println();
-            double mAdjust = mStickmanFX.mWobble;
-
-            // 40 segments to achieve the wobble: come and back
-            for (int i = 0; i < 19; i++) {
-                mStickmanFX.mWobble = mStickmanFX.mWobble + mAdjust;
-                Platform.runLater(()
-                        -> {
-                    mStickmanFX.update();
-                }
-                );
-
-                try {
-                    sleep(mSleepTime, 0);
-                } catch (InterruptedException ex) {
-                    mStickmanFX.mLogger.severe(ex.getMessage());
-                }
-            }
-
-            for (int i = 0; i < 19; i++) {
-                mStickmanFX.mWobble = mStickmanFX.mWobble - mAdjust;
-                if (i == 18) {
-                    mStickmanFX.mWobble = 0;
-                }
-                Platform.runLater(()
-                        -> {
-                    mStickmanFX.update();
-                }
-                );
-
-                try {
-                    sleep(mSleepTime, 0);
-                } catch (InterruptedException ex) {
-                    mStickmanFX.mLogger.severe(ex.getMessage());
-                }
-            }
-        }
-        while (mUnconsciouslyAction.isAlive());
+        };
     }
 }

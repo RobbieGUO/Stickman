@@ -15,13 +15,13 @@ import java.util.ArrayList;
  * @author Beka
  *
  */
-public class SadStart extends AnimationFX {
+public class SadLightStart extends AnimationFX {
 
-    public SadStart() {
+    public SadLightStart() {
         super();
     }
 
-    public SadStart(StickmanFX sm, int duration, boolean block) {
+    public SadLightStart(StickmanFX sm, int duration, boolean block) {
         super(sm, duration, block);
     }
 
@@ -29,7 +29,7 @@ public class SadStart extends AnimationFX {
     public void playAnimation() {
         // sad
         mAnimationPartFX = new ArrayList<>();
-        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMouthFX, "shape", "SAD"));
+        mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mMouthFX, "shape", "SADLIGHT"));
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyebrowFX, "shape", "DISGUSTED"));  // add by Robbie
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mRightEyebrowFX, "shape", "DISGUSTED")); // add by Robbie
         mAnimationPartFX.add(new AnimationContentFX(mStickmanFX.mLeftEyeFX, "shape", "SAD"));  // add by Robbie

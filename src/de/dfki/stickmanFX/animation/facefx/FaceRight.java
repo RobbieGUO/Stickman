@@ -29,6 +29,7 @@ public class FaceRight extends AnimationFX {
     @Override
     public void playAnimation() {
 
+        mStickmanFX.doAnimation("StopIdle", 10, true);
         int rotationUnit = 20;
 
         mStickmanFX.mMouthFX.setFaceflag("right");

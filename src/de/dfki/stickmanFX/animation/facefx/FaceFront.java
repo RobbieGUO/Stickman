@@ -106,6 +106,8 @@ public class FaceFront extends AnimationFX {
 
             mStickmanFX.update();
         });
+        
+        mStickmanFX.doAnimation("StartIdle", 10, true);
 
     }
 }
