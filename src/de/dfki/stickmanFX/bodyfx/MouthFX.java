@@ -20,12 +20,13 @@ import javafx.scene.shape.QuadCurveTo;
 public class MouthFX extends BodyPartFX {
 
     public static enum SHAPE {
-        DEFAULT, SMILE, SMILEEND, SAD, SADEND, SADLIGHT,ANGRY, ANGRYEND,
+        DEFAULT, SMILE, SMILEEND, SAD, SADEND, SADLIGHT, ANGRY, ANGRYEND,
         ANGRYSMALLMOUTH, ANGRYSMALLMOUTHEND, SURPRISED, SURPRISEDEND,
         HAPPY, HAPPYEND, DISGUSTED, DISGUSTEDEND, CONTEMPT, CONTEMPTEND,
         EXCITED, EXCITEDEND, EMBARRASSED, EMBARRASSEDEND, FEAR, FEAREND, O,
         ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN,
-        TWELVE, THIRTEEN, FOURTEEN, NINETEEN, TWENTY, TURNRIGHT, TURNLEFT
+        TWELVE, THIRTEEN, FOURTEEN, NINETEEN, TWENTY, TURNRIGHT, TURNLEFT,
+        DEFAULTHAPPY, DEFAULSMILE
     };
 
     HeadFX mHeadFX;
@@ -101,6 +102,24 @@ public class MouthFX extends BodyPartFX {
                 }
                 break;
 
+            case DEFAULTHAPPY:
+
+//                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - 3, mStart.y - 2));
+//                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y + 5, mEnd.x + 3, mEnd.y - 2));
+//                break;
+                movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
+
+                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - movement / 2 + 1, mStart.y - movement / 4));
+                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y -1 + movement/2, mEnd.x + movement / 2 -1, mStart.y - movement / 4));
+                mPath.getElements().add(new LineTo(mStart.x - mLength / 2 - movement / 2+ 1, mStart.y - movement / 4));
+                break;
+
+            case DEFAULSMILE:
+
+                mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - 3, mStart.y - 2));
+                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - 1, mEnd.x + 3, mEnd.y - 2));
+                break;
+
             case SMILE:
                 movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
 
@@ -134,12 +153,12 @@ public class MouthFX extends BodyPartFX {
                 mPath.getElements().add(new MoveTo(mStart.x - mLength / 2, mStart.y));
                 mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - 2, mEnd.x, mEnd.y));
                 break;
-                
-             case SAD:
+
+            case SAD:
                 movement = AnimatorFX.sMAX_ANIM_STEPS - mShapeAnimationStep;
 
                 mPath.getElements().add(new MoveTo(mStart.x - mLength / 2 - movement / 2, mStart.y + movement / 4));
-                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - movement/4, mEnd.x + movement / 2, mEnd.y + movement / 4));
+                mPath.getElements().add(new QuadCurveTo(mStart.x, mStart.y - movement / 4, mEnd.x + movement / 2, mEnd.y + movement / 4));
                 break;
 
             case SADEND:
